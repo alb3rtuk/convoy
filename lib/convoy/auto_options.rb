@@ -24,10 +24,8 @@ module Convoy
                         end
                     end
                 end
-                setup.add_global_option :verbosity, "Verbosity level of output for current execution (e.g. INFO, DEBUG)", :short => :none, :long => '--verbosity', :type => :string, :default => "WARN"
-
-                setup.add_global_option :error_output_format, "The format to use when outputting errors (e.g. basic, advanced)", :short => :none, :long => '--error-output-format', :type => :string, :default => "basic"
-                #TODO validations for the output format and the verbosity
+                setup.add_global_option :verbosity, 'Verbosity level of output for current execution (e.g. INFO, DEBUG)', :short => :none, :long => '--verbosity', :type => :string, :default => 'WARN'
+                setup.add_global_option :error_output_format, 'The format to use when outputting errors (e.g. basic, advanced)', :short => :none, :long => '--error-output-format', :type => :string, :default => 'basic'
             end
         end
 

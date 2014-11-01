@@ -330,8 +330,8 @@ module Trollop
             vals = {}
             required = {}
 
-            opt :version, "Print version and exit" if @version unless @specs[:version] || @long["version"]
-            opt :help, "Show this message" unless @specs[:help] || @long["help"]
+            opt :version, 'Prints version and exits' if @version unless @specs[:version] || @long['version']
+            opt :help, "\x1B[38;5;222mShows help message for current command\x1B[0m" unless @specs[:help] || @long['help']
 
             @specs.each do |sym, opts|
                 required[sym] = true if opts[:required]

@@ -13,6 +13,10 @@ module Convoy
                 commands = Commands.new(setup, context)
                 current_command = Commands.command_for(setup, context)
 
+                puts
+                puts "\x1B[38;5;202mBRIGHTPEARL-CLI (Ruby Gem)\x1B[0m"
+                puts
+
                 StreamOutputFormatter.new($stdout, :max_output_width => Terminal.width) do |f|
                     name_help(current_command, f)
                     usage_help(current_command, f)
@@ -25,7 +29,9 @@ module Convoy
             private
 
             def name_help(current_command, f)
-                f.puts "NAME"
+                return
+
+                f.puts 'NAME'
                 f.indent(4) do |f|
                     f.grid(:columns => 3) do |t|
                         t.row current_command.script_name, '-', setup.summary_for(context)
@@ -36,7 +42,7 @@ module Convoy
             end
 
             def usage_help(current_command, f)
-                f.puts "USAGE"
+                f.puts 'USAGE'
                 f.indent(4) do |f|
                     f.puts current_command.usage, :newlines => 2
                 end
@@ -44,7 +50,7 @@ module Convoy
 
             def version_help(current_command, f)
                 if setup.version
-                    f.puts "VERSION"
+                    f.puts 'VERSION'
                     f.indent(4) do |f|
                         f.puts setup.version, :newlines => 2
                     end
@@ -53,14 +59,25 @@ module Convoy
 
             def options_help(options, f)
                 if options.count > 0
-                    f.puts "OPTIONS"
+                    f.puts 'OPTIONS'
                     f.indent(4) do |f|
                         f.grid(:columns => 3) do |t|
                             options.each do |option|
-                                t.row option.usage, '-', option.description
-                                option_conflicts_help(option, t)
-                                option_dependencies_help(option, t)
-                                option_validations_help(option, t)
+                                unless option.usage == '--verbosity <s>' || option.usage == '--error-output-format <s>' || option.usage == '--version -v'
+                                    # if option.usage == '--help -h'
+                                    #     usage = "\x1B[38;5;222m#{option.usage}\x1B[0m"
+                                    #     usage_dash = "\x1B[38;5;222m-\x1B[0m"
+                                    #     description = "\x1B[38;5;222m#{option.description}\x1B[0m"
+                                    # else
+                                    #     usage = option.usage
+                                    #     usage_dash = '-'
+                                    #     description = option.description
+                                    # end
+                                    t.row option.usage, '-', option.description
+                                    option_conflicts_help(option, t)
+                                    option_dependencies_help(option, t)
+                                    option_validations_help(option, t)
+                                end
                             end
                         end
                         f.newline
