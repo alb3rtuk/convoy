@@ -1,5 +1,5 @@
-describe Escort::Formatter::StringSplitter do
-  let(:splitter) {Escort::Formatter::StringSplitter.new(max_segment_width)}
+describe Convoy::Formatter::StringSplitter do
+  let(:splitter) {Convoy::Formatter::StringSplitter.new(max_segment_width)}
 
   describe "#split" do
     subject {splitter.split(string)}

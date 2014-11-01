@@ -1,84 +1,84 @@
 autoload :Nesty,                            "nesty"
 
-module Escort
-  autoload :VERSION,                        "escort/version"
-  autoload :Trollop,                        "escort/trollop"
-  autoload :Utils,                          "escort/utils"
-  autoload :Arguments,                      "escort/arguments"
-  autoload :Logger,                         "escort/logger"
-  autoload :SetupAccessor,                  "escort/setup_accessor"
-  autoload :OptionDependencyValidator,      "escort/option_dependency_validator"
-  autoload :Validator,                      "escort/validator"
-  autoload :AutoOptions,                    "escort/auto_options"
-  autoload :GlobalPreParser,                "escort/global_pre_parser"
-  autoload :OptionParser,                   "escort/option_parser"
-  autoload :App,                            "escort/app"
+module Convoy
+  autoload :VERSION,                        "convoy/version"
+  autoload :Trollop,                        "convoy/trollop"
+  autoload :Utils,                          "convoy/utils"
+  autoload :Arguments,                      "convoy/arguments"
+  autoload :Logger,                         "convoy/logger"
+  autoload :SetupAccessor,                  "convoy/setup_accessor"
+  autoload :OptionDependencyValidator,      "convoy/option_dependency_validator"
+  autoload :Validator,                      "convoy/validator"
+  autoload :AutoOptions,                    "convoy/auto_options"
+  autoload :GlobalPreParser,                "convoy/global_pre_parser"
+  autoload :OptionParser,                   "convoy/option_parser"
+  autoload :App,                            "convoy/app"
 
-  autoload :Error,                          "escort/error/error"
-  autoload :BaseError,                      "escort/error/error"
-  autoload :UserError,                      "escort/error/error"
-  autoload :InternalError,                  "escort/error/error"
-  autoload :ClientError,                    "escort/error/error"
-  autoload :TransientError,                 "escort/error/error"
+  autoload :Error,                          "convoy/error/error"
+  autoload :BaseError,                      "convoy/error/error"
+  autoload :UserError,                      "convoy/error/error"
+  autoload :InternalError,                  "convoy/error/error"
+  autoload :ClientError,                    "convoy/error/error"
+  autoload :TransientError,                 "convoy/error/error"
 
   module Formatter
-    autoload :Option,                       "escort/formatter/option"
-    autoload :Options,                      "escort/formatter/options"
-    autoload :Command,                      "escort/formatter/command"
-    autoload :Commands,                     "escort/formatter/commands"
-    autoload :GlobalCommand,                "escort/formatter/global_command"
-    autoload :ShellCommandExecutor,         "escort/formatter/shell_command_executor"
-    autoload :Terminal,                     "escort/formatter/terminal"
-    autoload :StringSplitter,               "escort/formatter/string_splitter"
-    autoload :CursorPosition,               "escort/formatter/cursor_position"
-    autoload :StreamOutputFormatter,        "escort/formatter/stream_output_formatter"
-    autoload :StringGrid,                   "escort/formatter/string_grid"
-    autoload :DefaultHelpFormatter,         "escort/formatter/default_help_formatter"
+    autoload :Option,                       "convoy/formatter/option"
+    autoload :Options,                      "convoy/formatter/options"
+    autoload :Command,                      "convoy/formatter/command"
+    autoload :Commands,                     "convoy/formatter/commands"
+    autoload :GlobalCommand,                "convoy/formatter/global_command"
+    autoload :ShellCommandExecutor,         "convoy/formatter/shell_command_executor"
+    autoload :Terminal,                     "convoy/formatter/terminal"
+    autoload :StringSplitter,               "convoy/formatter/string_splitter"
+    autoload :CursorPosition,               "convoy/formatter/cursor_position"
+    autoload :StreamOutputFormatter,        "convoy/formatter/stream_output_formatter"
+    autoload :StringGrid,                   "convoy/formatter/string_grid"
+    autoload :DefaultHelpFormatter,         "convoy/formatter/default_help_formatter"
   end
 
   module Setup
     module Dsl
-      autoload :Options,                    "escort/setup/dsl/options"
-      autoload :Action,                     "escort/setup/dsl/action"
-      autoload :Command,                    "escort/setup/dsl/command"
-      autoload :ConfigFile,                 "escort/setup/dsl/config_file"
-      autoload :Global,                     "escort/setup/dsl/global"
+      autoload :Options,                    "convoy/setup/dsl/options"
+      autoload :Action,                     "convoy/setup/dsl/action"
+      autoload :Command,                    "convoy/setup/dsl/command"
+      autoload :ConfigFile,                 "convoy/setup/dsl/config_file"
+      autoload :Global,                     "convoy/setup/dsl/global"
     end
 
     module Configuration
       module Locator
-        autoload :Base,                     "escort/setup/configuration/locator/base"
-        autoload :DescendingToHome,         "escort/setup/configuration/locator/descending_to_home"
-        autoload :ExecutingScriptDirectory, "escort/setup/configuration/locator/executing_script_directory"
-        autoload :SpecifiedDirectory,       "escort/setup/configuration/locator/specified_directory"
-        autoload :Chaining,                 "escort/setup/configuration/locator/chaining"
+        autoload :Base,                     "convoy/setup/configuration/locator/base"
+        autoload :DescendingToHome,         "convoy/setup/configuration/locator/descending_to_home"
+        autoload :ExecutingScriptDirectory, "convoy/setup/configuration/locator/executing_script_directory"
+        autoload :SpecifiedDirectory,       "convoy/setup/configuration/locator/specified_directory"
+        autoload :Chaining,                 "convoy/setup/configuration/locator/chaining"
       end
 
-      autoload :MergeTool,                  "escort/setup/configuration/merge_tool"
-      autoload :Instance,                   "escort/setup/configuration/instance"
-      autoload :Reader,                     "escort/setup/configuration/reader"
-      autoload :Writer,                     "escort/setup/configuration/writer"
-      autoload :Generator,                  "escort/setup/configuration/generator"
-      autoload :Loader,                     "escort/setup/configuration/loader"
+      autoload :MergeTool,                  "convoy/setup/configuration/merge_tool"
+      autoload :Instance,                   "convoy/setup/configuration/instance"
+      autoload :Reader,                     "convoy/setup/configuration/reader"
+      autoload :Writer,                     "convoy/setup/configuration/writer"
+      autoload :Generator,                  "convoy/setup/configuration/generator"
+      autoload :Loader,                     "convoy/setup/configuration/loader"
     end
   end
 
   module ActionCommand
-    autoload :Base,                         "escort/action_command/base"
-    autoload :EscortUtilityCommand,         "escort/action_command/escort_utility_command"
+    autoload :Base,                         "convoy/action_command/base"
+    autoload :ConvoyUtilityCommand,         "convoy/action_command/convoy_utility_command"
   end
 end
 
 at_exit do
-  Escort::Logger.close
+  Convoy::Logger.close
 end
 
 def error_logger
-  Escort::Logger.error
+  Convoy::Logger.error
 end
 
 def output_logger
-  Escort::Logger.output
+  Convoy::Logger.output
 end
 
 

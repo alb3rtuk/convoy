@@ -7,7 +7,7 @@
       "error_output_format": "basic"
     },
     "commands": {
-      "escort": {
+      "convoy": {
         "options": {
           "create_config": null,
           "create_default_config": null,

@@ -1,14 +1,12 @@
-[![Build Status](https://travis-ci.org/skorks/escort.png?branch=master)](https://travis-ci.org/skorks/escort)
+# Convoy
 
-# Escort
-
-Writing even complex command-line apps should be quick, easy and fun. Escort takes the excellent [Trollop](http://trollop.rubyforge.org/) option parser and adds a whole bunch of awesome features to produce a library you will always want to turn to when a 'quick script' is in order.
+Writing even complex command-line apps should be quick, easy and fun. Convoy takes the excellent [Trollop](http://trollop.rubyforge.org/) option parser and adds a whole bunch of awesome features to produce a library you will always want to turn to when a 'quick script' is in order.
 
 ## Why Write Another CLI Tool
 
 A lot of the existing CLI making libraries delegate to OptionParser for actually parsing the option string, while OptionParser is nice it doesn't allow things like specifying the same option multiple times (e.g. like CURL -H parameter) which I like and use quite often. Trollop handles this case nicely, so a Trollop-based CLI tool is superior.
 
-Also a lot of the other CLI libraries in an attempt to be extra terse and DRY make their syntax a little obtuse. Escort tries to create a DSL that strikes a balance between being terse and being easy to understand, remember and read.
+Also a lot of the other CLI libraries in an attempt to be extra terse and DRY make their syntax a little obtuse. Convoy tries to create a DSL that strikes a balance between being terse and being easy to understand, remember and read.
 
 I find that I end up with a similar structure for the CLI apps that I write and I want to capture that as a bit of a convention/pattern. An app doesn't stop at the option parsing, how do you actually structure the code that executes the work?
 
@@ -38,8 +36,8 @@ In general, some libraries give you great option parsing, but no infinitely nest
   * Config file values can override default values
   * Command line options can override config file values
   * A space for user specific config values in the config file, which is available at runtime
-  * Automatic command with options to update and create config files in a default location or anywhere else (e.g. `my_app escort --update-config`)
-* Tool to bootstrap an Escort script (basic, with commands and with sub-commands)  (NOT YET IMPLEMENTED)
+  * Automatic command with options to update and create config files in a default location or anywhere else (e.g. `my_app convoy --update-config`)
+* Tool to bootstrap an Convoy script (basic, with commands and with sub-commands)  (NOT YET IMPLEMENTED)
 * Envrionment aware configuration (NOT YET IMPLEMENTED)
 * Project specific scripts support (NOT YET IMPLEMENTED)
 * Lots of usage examples (COMING SOON)
@@ -49,7 +47,7 @@ In general, some libraries give you great option parsing, but no infinitely nest
 
 Add this line to your application's Gemfile:
 
-    gem 'escort'
+    gem 'convoy'
 
 And then execute:
 
@@ -57,19 +55,19 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install escort
+    $ gem install convoy
 
 ## Usage
 
-Let's say you want to do a basic app. As long as `escort` is installed as a gem, you might do something like this:
+Let's say you want to do a basic app. As long as `convoy` is installed as a gem, you might do something like this:
 
 ```ruby
 #!/usr/bin/env ruby
 
-require 'escort'
+require 'convoy'
 require 'my_app'
 
-Escort::App.create do |app|
+Convoy::App.create do |app|
   app.action do |options, arguments|
     MyApp::ExampleCommand.new(options, arguments).execute
   end
@@ -82,17 +80,17 @@ If your script is called `app.rb` you is executable, you can then call it like t
 ./app.rb
 ./app.rb --help
 ```
-And it will run whatever code you have in the execute method of your `ExampleCommand`. The command should inherit from `::Escort::ActionCommand::Base` which will give it access to things like `options`, `arguments`, `command_options`, `config` etc.
+And it will run whatever code you have in the execute method of your `ExampleCommand`. The command should inherit from `::Convoy::ActionCommand::Base` which will give it access to things like `options`, `arguments`, `command_options`, `config` etc.
 
 Of course the above configuration didn't let us specify any options (except for `--help`), so lets add some.
 
 ```ruby
 #!/usr/bin/env ruby
 
-require 'escort'
+require 'convoy'
 require 'my_app'
 
-Escort::App.create do |app|
+Convoy::App.create do |app|
   app.options do |opts|
     opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string, :default => "option 1"
   end
@@ -118,10 +116,10 @@ Creating an option that can be specified multiple times is dead simple:
 ```ruby
 #!/usr/bin/env ruby
 
-require 'escort'
+require 'convoy'
 require 'my_app'
 
-Escort::App.create do |app|
+Convoy::App.create do |app|
   app.options do |opts|
     opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string, :default => "option 1"
     opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string, :multi => true
@@ -150,10 +148,10 @@ Flags are easy, just decalre an option as a `:boolean` and you can use it as a f
 ```ruby
 #!/usr/bin/env ruby
 
-require 'escort'
+require 'convoy'
 require 'my_app'
 
-Escort::App.create do |app|
+Convoy::App.create do |app|
   app.options do |opts|
     opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :boolean, :default => true
   end
@@ -177,15 +175,15 @@ If you use the negation, the value of `:option1` in the command hash will be `fa
 
 ### Required Arguments
 
-When you define an Escort app, by default it will not require you to supply any arguments to it. However you can specify that arguments are required for this app.
+When you define an Convoy app, by default it will not require you to supply any arguments to it. However you can specify that arguments are required for this app.
 
 ```ruby
 #!/usr/bin/env ruby
 
-require 'escort'
+require 'convoy'
 require 'my_app'
 
-Escort::App.create do |app|
+Convoy::App.create do |app|
   app.requires_arguments
 
   app.options do |opts|
@@ -237,10 +235,10 @@ You automatically get some nicely formatted help text for your app. But to make 
 ```ruby
 #!/usr/bin/env ruby
 
-require 'escort'
+require 'convoy'
 require 'my_app'
 
-Escort::App.create do |app|
+Convoy::App.create do |app|
   app.version "0.1.1"
   app.summary "Summary 1"
   app.description "Description 1"
@@ -290,10 +288,10 @@ You can set up some options to be dependent on the presence or absence of other 
 ```ruby
 #!/usr/bin/env ruby
 
-require 'escort'
+require 'convoy'
 require 'my_app'
 
-Escort::App.create do |app|
+Convoy::App.create do |app|
   app.options do |opts|
     opts.opt :flag1, "Flag 1", :short => '-f', :long => '--flag1', :type => :boolean
     opts.opt :flag2, "Flag 2", :short => :none, :long => '--flag2', :type => :boolean, :default => true
@@ -341,10 +339,10 @@ You can specify 2 or more option as conflicting, which means the app will not ex
 ```ruby
 #!/usr/bin/env ruby
 
-require 'escort'
+require 'convoy'
 require 'my_app'
 
-Escort::App.create do |app|
+Convoy::App.create do |app|
   app.options do |opts|
     opts.opt :flag1, "Flag 1", :short => '-f', :long => '--flag1', :type => :boolean
     opts.opt :flag2, "Flag 2", :short => :none, :long => '--flag2', :type => :boolean
@@ -380,10 +378,10 @@ Validations are pretty easy, they can be defined inside the options block. You m
 ```ruby
 #!/usr/bin/env ruby
 
-require 'escort'
+require 'convoy'
 require 'my_app'
 
-Escort::App.create do |app|
+Convoy::App.create do |app|
   app.options do |opts|
     opts.opt :option1, "Option 1", :short => '-o', :long => '--option1', :type => :string
     opts.opt :int1, "Int 1", :short => '-i', :long => '--int1', :type => :int
@@ -431,10 +429,10 @@ Sometime you have a whole bunch of command line options you need to pass in to y
 ```ruby
 #!/usr/bin/env ruby
 
-require 'escort'
+require 'convoy'
 require 'my_app'
 
-Escort::App.create do |app|
+Convoy::App.create do |app|
   app.config_file ".my_apprc", :autocreate => true
 
   app.options do |opts|
@@ -459,7 +457,7 @@ Essentially we give the config file a name and optionally set the config file to
       "error_output_format": "basic"
     },
     "commands": {
-      "escort": {
+      "convoy": {
         "options": {
           "create_config": null,
           "create_default_config": null,
@@ -476,15 +474,15 @@ Essentially we give the config file a name and optionally set the config file to
 }
 ```
 
-All the options you can supply to your app will be present in the config file as well as all the commands and all their options etc (you also get a bunch of options and a single command that get automatically added by escort for your convenience, these will be explained below). You can go and modify the values for all your options in the config file. The config file values, take precedence over the default values that you specified for the options (if any), but if you supply an option value on the command-line, this will still take precedence over the option value you define in the config file. This way you can provide sensible defaults and still override when necessary.
+All the options you can supply to your app will be present in the config file as well as all the commands and all their options etc (you also get a bunch of options and a single command that get automatically added by convoy for your convenience, these will be explained below). You can go and modify the values for all your options in the config file. The config file values, take precedence over the default values that you specified for the options (if any), but if you supply an option value on the command-line, this will still take precedence over the option value you define in the config file. This way you can provide sensible defaults and still override when necessary.
 
-Whenever you define an app to have a config file, escort will add some utility options and commands for you to make working with config files easier. Firstly, you will get a global `config` option. This can be used to make your app take a specific config file instead of the default one, this config file will only be valid for the single execution of your command-line app e.g.:
+Whenever you define an app to have a config file, convoy will add some utility options and commands for you to make working with config files easier. Firstly, you will get a global `config` option. This can be used to make your app take a specific config file instead of the default one, this config file will only be valid for the single execution of your command-line app e.g.:
 
 ```
 ./app.rb --config='/var/opt/.blahrc' -o yadda
 ```
 
-You also get a utility command for working with config files - the `escort` command. This command has 4 options:
+You also get a utility command for working with config files - the `convoy` command. This command has 4 options:
 
 * `--create-config` - this can be used to create a config file in a specified location
 * `--create-default-config` - this can be used to create a config file in the default location (home directory) if one doesn't already exit
@@ -493,7 +491,7 @@ You also get a utility command for working with config files - the `escort` comm
 
 These utility options can be very useful as the nested format of the config file can become confusing if you have to update it by hand with new options and commands while you're developing your apps.
 
-It is also worth knowing that Escort is quite clever when it comes to working out which config file to use for a particular run of the command-line app. It will not just use the config file in your home directory, but will instead attempt to find a config file closer in the directory hierarchy to the location of the command-line script. The strategy is as follows:
+It is also worth knowing that Convoy is quite clever when it comes to working out which config file to use for a particular run of the command-line app. It will not just use the config file in your home directory, but will instead attempt to find a config file closer in the directory hierarchy to the location of the command-line script. The strategy is as follows:
 
 * look for a config file in the directory where the command-line script itself lives, if found use that one
 * otherwise look for a config file in the current working directory and use that one
@@ -506,7 +504,7 @@ As you can see the config file support is quite extensive and can take your comm
 
 ### Command Suites
 
-You're not just limited to options for your command-line apps. Escort allows you to turn your command-line apps into command-line suites, with command support. Let's say you want a command-line app to control a process of some sort. Your process is `app.rb`. What you want to be able to do is the following:
+You're not just limited to options for your command-line apps. Convoy allows you to turn your command-line apps into command-line suites, with command support. Let's say you want a command-line app to control a process of some sort. Your process is `app.rb`. What you want to be able to do is the following:
 
 ```
 ./app.rb start
@@ -520,15 +518,15 @@ You also want to be able to provide options both to the main process itself as w
 ./app.rb -e production start --reload
 ```
 
-Escort makes this easy:
+Convoy makes this easy:
 
 ```ruby
 #!/usr/bin/env ruby
 
-require 'escort'
+require 'convoy'
 require 'my_app'
 
-Escort::App.create do |app|
+Convoy::App.create do |app|
   app.config_file ".my_apprc", :autocreate => true
 
   app.options do |opts|
@@ -573,7 +571,7 @@ Of course you would probably use a different `ActionCommand` class to implement 
 
 ### Command Suites Sub-Commands
 
-Of course if one level of commands is good it is only logical that multiple levels of commands is even better. Luckily Escort supports infinitely nesting sub-commands so you can create command-line suites which are truly extensive. Let's say you're writing a command-line utility for your framework, you've named your framework 'Rails' (cause surely that's not taken :P) and your utility is `rails`. You want your utility to be used for generating migrations as well as controllers, something like:
+Of course if one level of commands is good it is only logical that multiple levels of commands is even better. Luckily Convoy supports infinitely nesting sub-commands so you can create command-line suites which are truly extensive. Let's say you're writing a command-line utility for your framework, you've named your framework 'Rails' (cause surely that's not taken :P) and your utility is `rails`. You want your utility to be used for generating migrations as well as controllers, something like:
 
 ```
 rails generate migration
@@ -591,10 +589,10 @@ As we've come to expect, this is very easy:
 ```ruby
 #!/usr/bin/env ruby
 
-require 'escort'
+require 'convoy'
 require 'my_app'
 
-Escort::App.create do |app|
+Convoy::App.create do |app|
   app.config_file ".my_apprc", :autocreate => false
 
   app.options do |opts|
@@ -647,22 +645,22 @@ The `ExampleCommand` is an `ActionCommand` and is implemented in a separate clas
 A command might look like this:
 
 ```ruby
-module Escort
-  class ExampleCommand < ::Escort::ActionCommand::Base
+module Convoy
+  class ExampleCommand < ::Convoy::ActionCommand::Base
     def execute
-      Escort::Logger.output.puts "Command: #{command_name}"
-      Escort::Logger.output.puts "Options: #{options}"
-      Escort::Logger.output.puts "Command options: #{command_options}"
-      Escort::Logger.output.puts "Arguments: #{arguments}"
+      Convoy::Logger.output.puts "Command: #{command_name}"
+      Convoy::Logger.output.puts "Options: #{options}"
+      Convoy::Logger.output.puts "Command options: #{command_options}"
+      Convoy::Logger.output.puts "Arguments: #{arguments}"
       if config
-        Escort::Logger.output.puts "User config: #{config}"
+        Convoy::Logger.output.puts "User config: #{config}"
       end
     end
   end
 end
 ```
 
-As you can see all you need to do is inherit from `::Escort::ActionCommand::Base` and implement the execute method. Inheriting from `Base` gives you access to a bunch of useful methods:
+As you can see all you need to do is inherit from `::Convoy::ActionCommand::Base` and implement the execute method. Inheriting from `Base` gives you access to a bunch of useful methods:
 
 * `command_name` - the name of the command that is being executed (or :global if it is the main action)
 * `command_options` - the options for this command
@@ -676,15 +674,15 @@ These should give you hand in implementing the functionality you need, but most 
 
 ## Examples
 
-There is an examples directory where you can have a play with a whole bunch of little 'Escort' apps, from a very basic one with no options to more complex nested command suites with all the trimmings. Most of them call the `ExampleCommand` which lives in `examples/commands`. Have a read/play to learn, or just copy/paste bits straight into your apps.
+There is an examples directory where you can have a play with a whole bunch of little 'Convoy' apps, from a very basic one with no options to more complex nested command suites with all the trimmings. Most of them call the `ExampleCommand` which lives in `examples/commands`. Have a read/play to learn, or just copy/paste bits straight into your apps.
 
 ## More In-Depth
 
 TODO
 
-## Command-Line Tools Built With Escort
+## Command-Line Tools Built With Convoy
 
-If you've used Escort to build a command-line tool that you have made publicly available, feel free to add a link to it here.
+If you've used Convoy to build a command-line tool that you have made publicly available, feel free to add a link to it here.
 
 * https://github.com/skorks/ppjson - pretty print your JSON on the command-line (works with JSON strings as well as files containing JSON, can uglify as well as pretty print)
 

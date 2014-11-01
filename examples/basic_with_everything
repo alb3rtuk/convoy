@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
-require File.expand_path(File.join(File.expand_path(__FILE__), "..", "..", "lib", "escort"))
+require File.expand_path(File.join(File.expand_path(__FILE__), "..", "..", "lib", "convoy"))
 require File.join(File.expand_path(__FILE__), "..", "commands", "example_command")
 
-Escort::App.create do |app|
+Convoy::App.create do |app|
   app.version "0.1.1"
   app.summary "Summary 1"
   app.description "Description 1"
@@ -25,6 +25,6 @@ Escort::App.create do |app|
   end
 
   app.action do |options, arguments|
-    Escort::ExampleCommand.new(options, arguments).execute
+    Convoy::ExampleCommand.new(options, arguments).execute
   end
 end

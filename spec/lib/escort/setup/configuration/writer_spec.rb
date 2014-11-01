@@ -1,6 +1,6 @@
-describe Escort::Setup::Configuration::Writer do
+describe Convoy::Setup::Configuration::Writer do
   include FakeFS::SpecHelpers
-  let(:writer) {Escort::Setup::Configuration::Writer.new(path, data)}
+  let(:writer) {Convoy::Setup::Configuration::Writer.new(path, data)}
   let(:path) {'/usr/alan/blah.json'}
   let(:data) { {:hello => :world} }
 
@@ -21,7 +21,7 @@ describe Escort::Setup::Configuration::Writer do
           subject
           json = File.read(path)
           hash = ::JSON.parse(json)
-          actual_data = Escort::Utils.symbolize_keys(hash)
+          actual_data = Convoy::Utils.symbolize_keys(hash)
           actual_data.should == {:hello => "world"}
         end
       end
@@ -47,7 +47,7 @@ describe Escort::Setup::Configuration::Writer do
         subject
         json = File.read(path)
         hash = ::JSON.parse(json)
-        actual_data = Escort::Utils.symbolize_keys(hash)
+        actual_data = Convoy::Utils.symbolize_keys(hash)
         actual_data.should == {:hello => "world"}
       end
     end
@@ -67,7 +67,7 @@ describe Escort::Setup::Configuration::Writer do
         subject
         json = File.read(path)
         hash = ::JSON.parse(json)
-        actual_data = Escort::Utils.symbolize_keys(hash)
+        actual_data = Convoy::Utils.symbolize_keys(hash)
         actual_data.should == {:hello=>"blah", :foo=>"bar"}
       end
     end

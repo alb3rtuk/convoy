@@ -1,4 +1,4 @@
-describe Escort::Formatter::StringGrid do
+describe Convoy::Formatter::StringGrid do
   let(:width) {20}
 
   describe "#to_s" do
@@ -7,7 +7,7 @@ describe Escort::Formatter::StringGrid do
     context "when 2 rows and 3 columns" do
       context "no strings span multiple rows" do
         let(:grid) do
-          Escort::Formatter::StringGrid.new(:columns => 3, :width => width) do |g|
+          Convoy::Formatter::StringGrid.new(:columns => 3, :width => width) do |g|
             g.row 'a', 'b', 'c'
             g.row 1, 2, 3
           end
@@ -22,7 +22,7 @@ describe Escort::Formatter::StringGrid do
 
       context "first column string spans 4 rows" do
         let(:grid) do
-          Escort::Formatter::StringGrid.new(:columns => 3, :width => width) do |g|
+          Convoy::Formatter::StringGrid.new(:columns => 3, :width => width) do |g|
             g.row '123456789abcdefgh', 'b', 'c'
             g.row 1, 2, 3
           end
@@ -39,7 +39,7 @@ describe Escort::Formatter::StringGrid do
       end
       context "last column string spans 2 rows" do
         let(:grid) do
-          Escort::Formatter::StringGrid.new(:columns => 3, :width => width) do |g|
+          Convoy::Formatter::StringGrid.new(:columns => 3, :width => width) do |g|
             g.row 'a', 'b', 'c'
             g.row 1, 2, "123456789abcdefghijk"
           end

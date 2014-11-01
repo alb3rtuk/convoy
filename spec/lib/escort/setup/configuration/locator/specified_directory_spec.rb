@@ -1,7 +1,7 @@
-describe Escort::Setup::Configuration::Locator::SpecifiedDirectory do
+describe Convoy::Setup::Configuration::Locator::SpecifiedDirectory do
   include FakeFS::SpecHelpers
 
-  let(:locator) {Escort::Setup::Configuration::Locator::SpecifiedDirectory.new(filename, directory)}
+  let(:locator) {Convoy::Setup::Configuration::Locator::SpecifiedDirectory.new(filename, directory)}
   let(:filename) {'.blahrc'}
   let(:directory) {'/usr/alan/yadda'}
   let(:path) {File.join(directory, filename)}

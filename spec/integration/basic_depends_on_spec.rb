@@ -1,5 +1,5 @@
-describe "Escort basic app with dependent options", :integration => true do
-  subject { Escort::App.create(option_string, &app_configuration) }
+describe "Convoy basic app with dependent options", :integration => true do
+  subject { Convoy::App.create(option_string, &app_configuration) }
 
   context "when dependency specification has no 'on' parameter" do
     let(:app_configuration) do
@@ -12,7 +12,7 @@ describe "Escort basic app with dependent options", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end
@@ -31,7 +31,7 @@ describe "Escort basic app with dependent options", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end
@@ -61,7 +61,7 @@ describe "Escort basic app with dependent options", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end
@@ -108,7 +108,7 @@ describe "Escort basic app with dependent options", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end
@@ -141,7 +141,7 @@ describe "Escort basic app with dependent options", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end
@@ -174,7 +174,7 @@ describe "Escort basic app with dependent options", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end
@@ -205,7 +205,7 @@ describe "Escort basic app with dependent options", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end
@@ -223,7 +223,7 @@ describe "Escort basic app with dependent options", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end
@@ -241,7 +241,7 @@ describe "Escort basic app with dependent options", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end
@@ -258,7 +258,7 @@ describe "Escort basic app with dependent options", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end

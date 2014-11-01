@@ -1,14 +1,14 @@
-describe Escort::Setup::Configuration::Locator::Chaining do
+describe Convoy::Setup::Configuration::Locator::Chaining do
   include FakeFS::SpecHelpers
 
-  let(:locator) {Escort::Setup::Configuration::Locator::Chaining.new(filename)}
+  let(:locator) {Convoy::Setup::Configuration::Locator::Chaining.new(filename)}
   let(:filename) {'.blahrc'}
   let(:home) {File.expand_path('~')}
   let(:pwd) {File.expand_path(File.join(home, 'blah', 'yadda', 'foo'))}
   let(:executing_directory) {File.expand_path(File.dirname($0))}
 
-  let(:descending_locator) {Escort::Setup::Configuration::Locator::DescendingToHome.new(filename)}
-  let(:executing_script_locator) {Escort::Setup::Configuration::Locator::ExecutingScriptDirectory.new(filename)}
+  let(:descending_locator) {Convoy::Setup::Configuration::Locator::DescendingToHome.new(filename)}
+  let(:executing_script_locator) {Convoy::Setup::Configuration::Locator::ExecutingScriptDirectory.new(filename)}
 
   before do
     FileUtils.mkdir_p(executing_directory)

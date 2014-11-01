@@ -1,5 +1,5 @@
-describe "Escort basic app with conflicting options", :integration => true do
-  subject { Escort::App.create(option_string, &app_configuration) }
+describe "Convoy basic app with conflicting options", :integration => true do
+  subject { Convoy::App.create(option_string, &app_configuration) }
 
   let(:app_configuration) do
     lambda do |app|
@@ -11,7 +11,7 @@ describe "Escort basic app with conflicting options", :integration => true do
       end
 
       app.action do |options, arguments|
-        Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+        Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
       end
     end
   end
@@ -37,7 +37,7 @@ describe "Escort basic app with conflicting options", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end

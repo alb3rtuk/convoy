@@ -1,5 +1,5 @@
-describe Escort::SetupAccessor do
-  let(:command) { Escort::TestCommand.new(options, arguments, config) }
+describe Convoy::SetupAccessor do
+  let(:command) { Convoy::TestCommand.new(options, arguments, config) }
   let(:options) { {} }
   let(:arguments) { [] }
   let(:config) { {} }
@@ -192,8 +192,8 @@ describe Escort::SetupAccessor do
   end
 end
 
-module Escort
-  class TestCommand < ::Escort::ActionCommand::Base
+module Convoy
+  class TestCommand < ::Convoy::ActionCommand::Base
     def execute
     end
   end

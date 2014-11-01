@@ -1,7 +1,7 @@
-describe Escort::Setup::Configuration::Locator::ExecutingScriptDirectory do
+describe Convoy::Setup::Configuration::Locator::ExecutingScriptDirectory do
   include FakeFS::SpecHelpers
 
-  let(:locator) {Escort::Setup::Configuration::Locator::ExecutingScriptDirectory.new(filename)}
+  let(:locator) {Convoy::Setup::Configuration::Locator::ExecutingScriptDirectory.new(filename)}
   let(:filename) {'.blahrc'}
   let(:directory) {File.expand_path(File.dirname($0))}
   let(:path) {File.join(directory, filename)}

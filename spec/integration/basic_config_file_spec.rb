@@ -1,7 +1,7 @@
-describe "Escort basic app with config file defined", :integration => true do
+describe "Convoy basic app with config file defined", :integration => true do
   include FakeFS::SpecHelpers
 
-  subject { Escort::App.create(option_string, &app_configuration) }
+  subject { Convoy::App.create(option_string, &app_configuration) }
 
   let(:path) {File.join(File.expand_path('~'), '.test_apprc')}
   let(:app_configuration) do
@@ -13,7 +13,7 @@ describe "Escort basic app with config file defined", :integration => true do
       end
 
       app.action do |options, arguments|
-        Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+        Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
       end
     end
   end
@@ -98,27 +98,27 @@ describe "Escort basic app with config file defined", :integration => true do
       it("should exit with code 0") { expect{ subject }.to exit_with_code(0) }
     end
 
-    context "escort command should exist" do
-      let(:option_string) { "escort -h" }
+    context "convoy command should exist" do
+      let(:option_string) { "convoy -h" }
       it("should exit with code 0") { expect{ subject }.to exit_with_code(0) }
 
-      context "--create-config option for escort command should exist" do
-        let(:option_string) { "escort --create-config=#{path}" }
+      context "--create-config option for convoy command should exist" do
+        let(:option_string) { "convoy --create-config=#{path}" }
         it("should exit with code 0") { expect{ subject }.to exit_with_code(0) }
       end
 
-      context "--create-default-config option for escort command should exist" do
-        let(:option_string) { "escort --create-default-config" }
+      context "--create-default-config option for convoy command should exist" do
+        let(:option_string) { "convoy --create-default-config" }
         it("should exit with code 0") { expect{ subject }.to exit_with_code(0) }
       end
 
-      context "--update-config option for escort command should exist" do
-        let(:option_string) { "escort --update-config=#{path}" }
+      context "--update-config option for convoy command should exist" do
+        let(:option_string) { "convoy --update-config=#{path}" }
         it("should exit with code 0") { expect{ subject }.to exit_with_code(0) }
       end
 
-      context "--update-default-config option for escort command should exist" do
-        let(:option_string) { "escort --update-default-config" }
+      context "--update-default-config option for convoy command should exist" do
+        let(:option_string) { "convoy --update-default-config" }
         it("should exit with code 0") { expect{ subject }.to exit_with_code(0) }
       end
     end

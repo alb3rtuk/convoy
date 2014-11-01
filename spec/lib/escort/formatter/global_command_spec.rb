@@ -1,6 +1,6 @@
-describe Escort::Formatter::GlobalCommand do
-  let(:command) { Escort::Formatter::GlobalCommand.new(setup)}
-  let(:setup) { Escort::SetupAccessor.new(app_configuration) }
+describe Convoy::Formatter::GlobalCommand do
+  let(:command) { Convoy::Formatter::GlobalCommand.new(setup)}
+  let(:setup) { Convoy::SetupAccessor.new(app_configuration) }
   let(:context) {[]}
   let(:name) {:command1}
   let(:command_alias) {:c1}
@@ -9,7 +9,7 @@ describe Escort::Formatter::GlobalCommand do
   let(:description) {'app description'}
 
   let(:app_configuration) do
-    Escort::Setup::Dsl::Global.new do |app|
+    Convoy::Setup::Dsl::Global.new do |app|
       app.summary summary
       app.description description
 

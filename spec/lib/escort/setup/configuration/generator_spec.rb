@@ -1,7 +1,7 @@
-describe Escort::Setup::Configuration::Generator do
+describe Convoy::Setup::Configuration::Generator do
 
-  let(:generator) {Escort::Setup::Configuration::Generator.new(setup)}
-  let(:setup) { Escort::SetupAccessor.new(app_configuration) }
+  let(:generator) {Convoy::Setup::Configuration::Generator.new(setup)}
+  let(:setup) { Convoy::SetupAccessor.new(app_configuration) }
 
 
   describe "#default_data" do
@@ -9,7 +9,7 @@ describe Escort::Setup::Configuration::Generator do
 
     context "when basic configuration" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "option1", :short => :none, :long => '--option1', :type => :string
           end
@@ -31,7 +31,7 @@ describe Escort::Setup::Configuration::Generator do
 
       context "and configured option has default value" do
         let(:app_configuration) do
-          Escort::Setup::Dsl::Global.new do |app|
+          Convoy::Setup::Dsl::Global.new do |app|
             app.options do |opts|
               opts.opt :option1, "option1", :short => :none, :long => '--option1', :type => :string, :default => "hello"
             end
@@ -46,7 +46,7 @@ describe Escort::Setup::Configuration::Generator do
 
     context "when suite configuration" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "option1", :short => :none, :long => '--option1', :type => :string
           end
@@ -70,7 +70,7 @@ describe Escort::Setup::Configuration::Generator do
 
     context "when suite with sub commands configuration" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "option1", :short => :none, :long => '--option1', :type => :string
           end

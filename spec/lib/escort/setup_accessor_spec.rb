@@ -1,8 +1,8 @@
-describe Escort::SetupAccessor do
-  let(:setup) { Escort::SetupAccessor.new(app_configuration) }
+describe Convoy::SetupAccessor do
+  let(:setup) { Convoy::SetupAccessor.new(app_configuration) }
 
   let(:global_app_configuration) do
-    Escort::Setup::Dsl::Global.new do |app|
+    Convoy::Setup::Dsl::Global.new do |app|
       app.options do |opts|
         opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string, :default => "option 1"
         opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string, :multi => true
@@ -21,7 +21,7 @@ describe Escort::SetupAccessor do
   end
 
   let(:command_app_configuration) do
-    Escort::Setup::Dsl::Global.new do |app|
+    Convoy::Setup::Dsl::Global.new do |app|
       app.options do |opts|
         opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string, :default => "option 1"
       end
@@ -57,7 +57,7 @@ describe Escort::SetupAccessor do
   end
 
   let(:sub_command_app_configuration) do
-    Escort::Setup::Dsl::Global.new do |app|
+    Convoy::Setup::Dsl::Global.new do |app|
       app.options do |opts|
         opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string, :default => "option 1"
       end

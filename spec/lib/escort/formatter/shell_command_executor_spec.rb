@@ -1,5 +1,5 @@
-describe Escort::Formatter::ShellCommandExecutor do
-  let(:executor) {Escort::Formatter::ShellCommandExecutor.new(command)}
+describe Convoy::Formatter::ShellCommandExecutor do
+  let(:executor) {Convoy::Formatter::ShellCommandExecutor.new(command)}
   let(:result) { [] }
   let(:error_callback) {lambda{ |command, error| result << 'error'; result << error.class }}
 
@@ -18,7 +18,7 @@ describe Escort::Formatter::ShellCommandExecutor do
       #context "but options passed to it are invalid" do
         #let(:command) { 'ls --foobar' }
         #it("error callback should be executed") {subject; result.first.should == 'error'}
-        #it("command should produce an exit status error") {subject; result[1].should == Escort::InternalError}
+        #it("command should produce an exit status error") {subject; result[1].should == Convoy::InternalError}
         #it("should return nil") {subject.should be_nil}
       #end
 
@@ -45,7 +45,7 @@ describe Escort::Formatter::ShellCommandExecutor do
       context "but options passed to it are invalid" do
         let(:command) { 'ls --foobar' }
         it("error callback should be executed") {subject; result.first.should == 'error'}
-        it("command should produce an exit status error") {subject; result[1].should == Escort::InternalError}
+        it("command should produce an exit status error") {subject; result[1].should == Convoy::InternalError}
         it("should return nil") {subject.should be_nil}
       end
 

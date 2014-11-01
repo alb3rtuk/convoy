@@ -1,5 +1,5 @@
-describe Escort::Setup::Configuration::MergeTool do
-  let(:merge_tool) {Escort::Setup::Configuration::MergeTool.new(new_config_hash, old_config_hash)}
+describe Convoy::Setup::Configuration::MergeTool do
+  let(:merge_tool) {Convoy::Setup::Configuration::MergeTool.new(new_config_hash, old_config_hash)}
 
   describe "#config_hash" do
     subject {merge_tool.config_hash}

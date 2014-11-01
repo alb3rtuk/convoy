@@ -1,6 +1,6 @@
-describe Escort::Formatter::Command do
-  let(:command) { Escort::Formatter::Command.new(name, setup, context)}
-  let(:setup) { Escort::SetupAccessor.new(app_configuration) }
+describe Convoy::Formatter::Command do
+  let(:command) { Convoy::Formatter::Command.new(name, setup, context)}
+  let(:setup) { Convoy::SetupAccessor.new(app_configuration) }
   let(:context) {[]}
   let(:name) {:command1}
   let(:command_alias) {:c1}
@@ -9,7 +9,7 @@ describe Escort::Formatter::Command do
   let(:description) {'command description'}
 
   let(:app_configuration) do
-    Escort::Setup::Dsl::Global.new do |app|
+    Convoy::Setup::Dsl::Global.new do |app|
       app.command name, :aliases => aliases  do |command|
         command.summary summary
         command.description description
@@ -132,7 +132,7 @@ describe Escort::Formatter::Command do
 
     context "when no child commands" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.action do |options, arguments|
           end
         end
@@ -152,7 +152,7 @@ describe Escort::Formatter::Command do
 
     context "when no child commands" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.action do |options, arguments|
           end
         end
@@ -174,7 +174,7 @@ describe Escort::Formatter::Command do
 
     context "when arguments are required" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.requires_arguments
           app.action do |options, arguments|
           end
@@ -193,7 +193,7 @@ describe Escort::Formatter::Command do
 
     context "when global command with no children" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.action do |options, arguments|
           end
         end
@@ -213,7 +213,7 @@ describe Escort::Formatter::Command do
 
     context "when global command and requires arguments" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.requires_arguments
           app.action do |options, arguments|
           end

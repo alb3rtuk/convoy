@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in escort.gemspec
+# Specify your gem's dependencies in convoy.gemspec
 gemspec

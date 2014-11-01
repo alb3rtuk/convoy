@@ -1,4 +1,4 @@
-require 'escort'
+require 'convoy'
 require 'fakefs/safe'
 require 'fakefs/spec_helpers'
 

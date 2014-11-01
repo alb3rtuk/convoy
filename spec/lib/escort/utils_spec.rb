@@ -1,6 +1,6 @@
-describe Escort::Utils do
+describe Convoy::Utils do
   describe '::symbolize_keys' do
-    subject {Escort::Utils.symbolize_keys(hash)}
+    subject {Convoy::Utils.symbolize_keys(hash)}
 
     context "when single level hash" do
       let(:hash) { {'a' => 1, :b => 2} }
@@ -16,7 +16,7 @@ describe Escort::Utils do
   end
 
   describe '::tokenize_option_string' do
-    subject {Escort::Utils.tokenize_option_string(option_string)}
+    subject {Convoy::Utils.tokenize_option_string(option_string)}
 
     context "when option string has short option, long option and argument" do
       let(:option_string) {"-a 1 --foo='bar blah' yadda"}

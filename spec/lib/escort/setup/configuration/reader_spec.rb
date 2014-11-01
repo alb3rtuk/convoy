@@ -1,7 +1,7 @@
-describe Escort::Setup::Configuration::Reader do
+describe Convoy::Setup::Configuration::Reader do
   include FakeFS::SpecHelpers
 
-  let(:reader) {Escort::Setup::Configuration::Reader.new(path)}
+  let(:reader) {Convoy::Setup::Configuration::Reader.new(path)}
   let(:path) {'/usr/alan/blah.json'}
   let(:data) { {:hello => :world} }
 

@@ -1,5 +1,5 @@
-describe "Escort basic app with validations", :integration => true do
-  subject { Escort::App.create(option_string, &app_configuration) }
+describe "Convoy basic app with validations", :integration => true do
+  subject { Convoy::App.create(option_string, &app_configuration) }
 
   context "when validation exists for non-existant option" do
     let(:app_configuration) do
@@ -10,7 +10,7 @@ describe "Escort basic app with validations", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end
@@ -28,7 +28,7 @@ describe "Escort basic app with validations", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end
@@ -54,7 +54,7 @@ describe "Escort basic app with validations", :integration => true do
         end
 
         app.action do |options, arguments|
-          Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+          Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
         end
       end
     end

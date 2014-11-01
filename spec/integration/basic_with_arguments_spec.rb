@@ -1,14 +1,14 @@
 require 'readline'
 
-describe "Escort basic app that requires arguments", :integration => true do
-  subject { Escort::App.create(option_string, &app_configuration) }
+describe "Convoy basic app that requires arguments", :integration => true do
+  subject { Convoy::App.create(option_string, &app_configuration) }
 
   let(:app_configuration) do
     lambda do |app|
       app.requires_arguments
 
       app.action do |options, arguments|
-        Escort::IntegrationTestCommand.new(options, arguments).execute(result)
+        Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
       end
     end
   end

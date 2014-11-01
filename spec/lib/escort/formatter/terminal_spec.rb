@@ -1,5 +1,5 @@
-describe Escort::Formatter::Terminal do
-  let(:terminal) {Escort::Formatter::Terminal}
+describe Convoy::Formatter::Terminal do
+  let(:terminal) {Convoy::Formatter::Terminal}
 
   describe "#width" do
     subject {terminal.width}
@@ -11,9 +11,9 @@ describe Escort::Formatter::Terminal do
 
     context "when width could not be found successfully" do
       before do
-        Escort::Formatter::ShellCommandExecutor.any_instance.stub(:execute_in_current_shell).and_return(nil)
+        Convoy::Formatter::ShellCommandExecutor.any_instance.stub(:execute_in_current_shell).and_return(nil)
       end
-      it("should be equal to default width") {subject.should == Escort::Formatter::Terminal::DEFAULT_WIDTH}
+      it("should be equal to default width") {subject.should == Convoy::Formatter::Terminal::DEFAULT_WIDTH}
     end
   end
 end

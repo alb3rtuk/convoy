@@ -1,7 +1,7 @@
-describe Escort::Setup::Configuration::Locator::DescendingToHome do
+describe Convoy::Setup::Configuration::Locator::DescendingToHome do
   include FakeFS::SpecHelpers
 
-  let(:locator) {Escort::Setup::Configuration::Locator::DescendingToHome.new(filename)}
+  let(:locator) {Convoy::Setup::Configuration::Locator::DescendingToHome.new(filename)}
   let(:filename) {'.blahrc'}
   let(:home) {File.expand_path('~')}
   let(:pwd) {File.expand_path(File.join(home, 'blah', 'yadda', 'foo'))}

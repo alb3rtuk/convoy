@@ -1,5 +1,5 @@
-describe Escort::Formatter::StreamOutputFormatter do
-  let(:formatter) {Escort::Formatter::StreamOutputFormatter.new(stream, :max_output_width => output_width)}
+describe Convoy::Formatter::StreamOutputFormatter do
+  let(:formatter) {Convoy::Formatter::StreamOutputFormatter.new(stream, :max_output_width => output_width)}
   let(:stream) { StringIO.new }
   let(:output_width) { 10 }
   let(:output) {stream.readlines}
@@ -168,7 +168,7 @@ describe Escort::Formatter::StreamOutputFormatter do
 
   context "output combinations" do
     subject do
-      Escort::Formatter::StreamOutputFormatter.new(stream, :max_output_width => output_width) do |f|
+      Convoy::Formatter::StreamOutputFormatter.new(stream, :max_output_width => output_width) do |f|
         f.print "the quick"
         f.newline
         f.print "brown fox"

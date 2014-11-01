@@ -1,6 +1,6 @@
-describe Escort::Formatter::Option do
-  let(:option) {Escort::Formatter::Option.new(name, details, setup, context)}
-  let(:setup) { Escort::SetupAccessor.new(app_configuration) }
+describe Convoy::Formatter::Option do
+  let(:option) {Convoy::Formatter::Option.new(name, details, setup, context)}
+  let(:setup) { Convoy::SetupAccessor.new(app_configuration) }
   let(:context) {[]}
   let(:name) { 'option1' }
   let(:details) do
@@ -11,7 +11,7 @@ describe Escort::Formatter::Option do
   let(:default) {'foo'}
   let(:desc) {'Option 1'}
   let(:app_configuration) do
-    Escort::Setup::Dsl::Global.new do |app|
+    Convoy::Setup::Dsl::Global.new do |app|
     end
   end
 
@@ -98,7 +98,7 @@ describe Escort::Formatter::Option do
     subject {option.has_conflicts?}
     context "when no conflicts defined" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string
             opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string
@@ -113,7 +113,7 @@ describe Escort::Formatter::Option do
 
     context "when conflict is defined" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string, :conflicts_with => :option2
             opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string
@@ -131,7 +131,7 @@ describe Escort::Formatter::Option do
     subject {option.has_dependencies?}
     context "when no dependencies defined" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string
             opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string
@@ -146,7 +146,7 @@ describe Escort::Formatter::Option do
 
     context "when dependency is defined" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string, :depends_on => :option2
             opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string
@@ -164,7 +164,7 @@ describe Escort::Formatter::Option do
     subject {option.has_validations?}
     context "when no validations defined" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string
             opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string
@@ -179,7 +179,7 @@ describe Escort::Formatter::Option do
 
     context "when validations is defined" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string
             opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string
@@ -199,7 +199,7 @@ describe Escort::Formatter::Option do
     subject {option.conflicts}
     context "when no conflicts defined" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string
             opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string
@@ -214,7 +214,7 @@ describe Escort::Formatter::Option do
 
     context "when conflict is defined" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string, :conflicts_with => [:option2, :option3]
             opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string
@@ -233,7 +233,7 @@ describe Escort::Formatter::Option do
     subject {option.dependencies}
     context "when no dependencies defined" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string
             opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string
@@ -248,7 +248,7 @@ describe Escort::Formatter::Option do
 
     context "when dependency is defined" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string, :depends_on => :option2
             opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string
@@ -266,7 +266,7 @@ describe Escort::Formatter::Option do
     subject {option.validations}
     context "when no validations defined" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string
             opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string
@@ -281,7 +281,7 @@ describe Escort::Formatter::Option do
 
     context "when validations is defined" do
       let(:app_configuration) do
-        Escort::Setup::Dsl::Global.new do |app|
+        Convoy::Setup::Dsl::Global.new do |app|
           app.options do |opts|
             opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string
             opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string

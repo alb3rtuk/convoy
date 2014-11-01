@@ -14,8 +14,8 @@ shared_context "integration test setup", :integration => true do
     $stdin = STDIN
   end
 
-  module Escort
-    class IntegrationTestCommand < ::Escort::ActionCommand::Base
+  module Convoy
+    class IntegrationTestCommand < ::Convoy::ActionCommand::Base
       def execute(result)
         result[:command_name] = command_name
         result[:command_options] = command_options
