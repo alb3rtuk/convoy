@@ -4,7 +4,7 @@ require File.expand_path(File.join(File.expand_path(__FILE__), "..", "..", "lib"
 require File.join(File.expand_path(__FILE__), "..", "commands", "example_command")
 
 Convoy::App.create do |app|
-  app.action do |options, arguments|
-    Convoy::ExampleCommand.new(options, arguments).execute
-  end
+    app.action do |options, arguments|
+        Convoy::ExampleCommand.new(options, arguments).execute
+    end
 end

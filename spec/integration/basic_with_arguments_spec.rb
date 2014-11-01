@@ -1,35 +1,35 @@
 require 'readline'
 
 describe "Convoy basic app that requires arguments", :integration => true do
-  subject { Convoy::App.create(option_string, &app_configuration) }
+    subject { Convoy::App.create(option_string, &app_configuration) }
 
-  let(:app_configuration) do
-    lambda do |app|
-      app.requires_arguments
+    let(:app_configuration) do
+        lambda do |app|
+            app.requires_arguments
 
-      app.action do |options, arguments|
-        Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
-      end
-    end
-  end
-
-  context "when called with no arguments" do
-    let(:option_string) { "" }
-
-    before do
-      Readline.stub(:readline).and_return('1', nil)
+            app.action do |options, arguments|
+                Convoy::IntegrationTestCommand.new(options, arguments).execute(result)
+            end
+        end
     end
 
-    it("action should receive ['1'] as arguments") { expect{subject}.to execute_action_with_arguments(result, ['1']) }
-  end
+    context "when called with no arguments" do
+        let(:option_string) { "" }
 
-  context "when called with one argument" do
-    let(:option_string) { "1" }
-    it("action should receive ['1'] as arguments") { expect{subject}.to execute_action_with_arguments(result, ['1']) }
-  end
+        before do
+            Readline.stub(:readline).and_return('1', nil)
+        end
 
-  context "when called with three arguments" do
-    let(:option_string) { "1 2 3" }
-    it("action should receive ['1', '2', '3'] as arguments") { expect{subject}.to execute_action_with_arguments(result, ['1', '2', '3']) }
-  end
+        it("action should receive ['1'] as arguments") { expect { subject }.to execute_action_with_arguments(result, ['1']) }
+    end
+
+    context "when called with one argument" do
+        let(:option_string) { "1" }
+        it("action should receive ['1'] as arguments") { expect { subject }.to execute_action_with_arguments(result, ['1']) }
+    end
+
+    context "when called with three arguments" do
+        let(:option_string) { "1 2 3" }
+        it("action should receive ['1', '2', '3'] as arguments") { expect { subject }.to execute_action_with_arguments(result, ['1', '2', '3']) }
+    end
 end

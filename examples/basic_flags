@@ -4,12 +4,12 @@ require File.expand_path(File.join(File.expand_path(__FILE__), "..", "..", "lib"
 require File.join(File.expand_path(__FILE__), "..", "commands", "example_command")
 
 Convoy::App.create do |app|
-  app.options do |opts|
-    opts.opt :flag1, "Flag 1", :short => '-f', :long => '--flag1', :type => :boolean, :default => true
-    opts.opt :flag2, "Flag 2", :short => :none, :long => '--flag2', :type => :boolean
-  end
+    app.options do |opts|
+        opts.opt :flag1, "Flag 1", :short => '-f', :long => '--flag1', :type => :boolean, :default => true
+        opts.opt :flag2, "Flag 2", :short => :none, :long => '--flag2', :type => :boolean
+    end
 
-  app.action do |options, arguments|
-    Convoy::ExampleCommand.new(options, arguments).execute
-  end
+    app.action do |options, arguments|
+        Convoy::ExampleCommand.new(options, arguments).execute
+    end
 end
