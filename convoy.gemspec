@@ -1,25 +1,19 @@
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'convoy/version'
-
-Gem::Specification.new do |gem|
-    gem.name = "convoy"
-    gem.version = Convoy::VERSION
-    gem.authors = ["Alan Skorkin"]
-    gem.email = ["alan@skorks.com"]
-    gem.summary = %q{A library that makes building command line apps in ruby so easy, you'll feel like an expert is guiding you through it}
-    gem.description = %q{Writing even complex command-line apps should be quick, easy and fun. Convoy takes the excellent Trollop option parser and adds a whole bunch of awesome features to produce a library you will always want to turn to when a 'quick script' is in order.}
-    gem.homepage = "https://github.com/skorks/convoy"
-
-    gem.add_runtime_dependency('nesty')
-
-    gem.add_development_dependency('rspec')
-    gem.add_development_dependency('fakefs')
-    gem.add_development_dependency('rake')
-    gem.add_development_dependency('travis-lint')
-
-    gem.files = `git ls-files`.split($/)
-    gem.executables = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
-    gem.test_files = gem.files.grep(%r{^(test|spec|features)/})
-    gem.require_paths = ["lib"]
+Gem::Specification.new do |s|
+    s.name = 'convoy'
+    s.version = '1.0.0'
+    s.authors = ['Albert Rannetsperger']
+    s.email = 'albert.rannetsperger@brightpearl.com'
+    s.summary = %q{A library that makes building command line apps in ruby so easy, you'll feel like an expert is guiding you through it}
+    s.description = %q{Writing even complex command-line apps should be quick, easy and fun. Convoy takes the excellent Trollop option parser and adds a whole bunch of awesome features to produce a library you will always want to turn to when a 'quick script' is in order.}
+    s.homepage = 'http://rubygems.org/gems/brightpearl-cli'
+    s.license = 'MIT'
+    s.add_runtime_dependency 'nesty', '~> 1.0', '>= 1.0.2'
+    s.add_development_dependency 'rspec', '~> 3.1', '>= 3.1.0'
+    s.add_development_dependency 'fakefs', '~> 0.5', '>= 0.5.3'
+    s.add_development_dependency 'rake', '~> 10.3', '>= 10.3.2'
+    s.add_development_dependency 'travis-lint', '~> 2.0', '>= 2.0.0'
+    s.files = `git ls-files`.split($/)
+    s.executables = s.files.grep(%r{^bin/}).map { |f| File.basename(f) }
+    s.test_files = s.files.grep(%r{^(test|spec|features)/})
+    s.require_paths = ['lib']
 end

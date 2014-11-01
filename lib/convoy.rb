@@ -1,7 +1,6 @@
 autoload :Nesty, "nesty"
 
 module Convoy
-    autoload :VERSION, "convoy/version"
     autoload :Trollop, "convoy/trollop"
     autoload :Utils, "convoy/utils"
     autoload :Arguments, "convoy/arguments"
