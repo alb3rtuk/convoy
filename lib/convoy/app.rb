@@ -89,15 +89,15 @@ module Convoy
         def handle_convoy_error(e)
             if e.kind_of?(Convoy::UserError)
                 print_stacktrace(e)
-                error_logger.debug { "Convoy app failed to execute successfully, due to user error" }
+                error_logger.debug {'Convoy app failed to execute successfully, due to user error'}
                 exit(Convoy::USER_ERROR_EXIT_CODE)
             elsif e.kind_of?(Convoy::ClientError)
                 print_stacktrace(e)
-                error_logger.debug { "Convoy app failed to execute successfully, due to client setup error" }
+                error_logger.debug {'Convoy app failed to execute successfully, due to client setup error'}
                 exit(Convoy::CLIENT_ERROR_EXIT_CODE)
             else
                 print_convoy_error_message(e)
-                error_logger.debug { "Convoy app failed to execute successfully, due to internal error" }
+                error_logger.debug {'Convoy app failed to execute successfully, due to internal error'}
                 exit(Convoy::INTERNAL_ERROR_EXIT_CODE)
             end
         end
@@ -105,11 +105,11 @@ module Convoy
         def handle_action_error(e)
             if e.kind_of?(Convoy::Error)
                 print_convoy_error_message(e)
-                error_logger.debug { "Convoy app failed to execute successfully, due to internal error" }
+                error_logger.debug {'Convoy app failed to execute successfully, due to internal error'}
                 exit(Convoy::INTERNAL_ERROR_EXIT_CODE)
             else
                 print_stacktrace(e)
-                error_logger.debug { "Convoy app failed to execute successfully, due to unknown error" }
+                error_logger.debug {'Convoy app failed to execute successfully, due to unknown error'}
                 exit(Convoy::EXTERNAL_ERROR_EXIT_CODE)
             end
         end
@@ -121,7 +121,7 @@ module Convoy
 
         def print_convoy_error_message(e)
             print_stacktrace(e)
-            error_logger.warn { "An internal Convoy error has occurred, you should probably report it by creating an issue on github! To get a stacktrace, up the verbosity level to DEBUG and execute your command again. Use --help for details." }
+            error_logger.warn {"\n  \x1B[48;5;196m ERROR \x1B[0m An internal Convoy error occurred.\n\n    You should probably report it to \x1B[38;5;222mAlbert Rannetsperger\x1B[0m or create an issue on his \x1B[38;5;222mGitHub\x1B[0m page (https://github.com/alb3rtuk).\n    Make sure to include the stacktrace above (although it probably won't be very helpful).bp\n\n"}
         end
     end
 end

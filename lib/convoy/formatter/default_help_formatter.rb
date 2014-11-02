@@ -12,26 +12,28 @@ module Convoy
                 options = Options.new(parser, setup, context)
                 commands = Commands.new(setup, context)
                 current_command = Commands.command_for(setup, context)
-
-                puts
-                puts "\x1B[38;5;202mBRIGHTPEARL-CLI (Ruby Gem)\x1B[0m"
-                puts
-
                 StreamOutputFormatter.new($stdout, :max_output_width => Terminal.width) do |f|
-                    name_help(current_command, f)
+                    puts
+                    if setup.summary_for != '' && !setup.summary_for.nil?
+                        f.puts setup.summary_for, :newlines => 2
+                    end
+                    if (setup.description_for != '' && !setup.description_for.nil?) && current_command.summary == setup.summary_for
+                        f.indent(4) do |f_inner|
+                            f_inner.puts setup.description_for, :newlines => 2
+                        end
+                    end
+                    # name_help(current_command, f)
                     usage_help(current_command, f)
                     version_help(current_command, f)
-                    options_help(options, f)
                     commands_help(commands, f)
+                    options_help(options, f)
                 end
             end
 
             private
 
             def name_help(current_command, f)
-                return
-
-                f.puts 'NAME'
+                f.puts "\x1B[38;5;84mNAME\x1B[0m"
                 f.indent(4) do |f|
                     f.grid(:columns => 3) do |t|
                         t.row current_command.script_name, '-', setup.summary_for(context)
@@ -42,7 +44,7 @@ module Convoy
             end
 
             def usage_help(current_command, f)
-                f.puts 'USAGE'
+                f.puts "\x1B[38;5;84mUSAGE\x1B[0m"
                 f.indent(4) do |f|
                     f.puts current_command.usage, :newlines => 2
                 end
@@ -50,7 +52,7 @@ module Convoy
 
             def version_help(current_command, f)
                 if setup.version
-                    f.puts 'VERSION'
+                    f.puts "\x1B[38;5;84mVERSION\x1B[0m"
                     f.indent(4) do |f|
                         f.puts setup.version, :newlines => 2
                     end
@@ -59,21 +61,12 @@ module Convoy
 
             def options_help(options, f)
                 if options.count > 0
-                    f.puts 'OPTIONS'
+                    f.puts "\x1B[38;5;84mFLAGS\x1B[0m"
                     f.indent(4) do |f|
                         f.grid(:columns => 3) do |t|
                             options.each do |option|
-                                unless option.usage == '--verbosity <s>' || option.usage == '--error-output-format <s>' || option.usage == '--version -v'
-                                    # if option.usage == '--help -h'
-                                    #     usage = "\x1B[38;5;222m#{option.usage}\x1B[0m"
-                                    #     usage_dash = "\x1B[38;5;222m-\x1B[0m"
-                                    #     description = "\x1B[38;5;222m#{option.description}\x1B[0m"
-                                    # else
-                                    #     usage = option.usage
-                                    #     usage_dash = '-'
-                                    #     description = option.description
-                                    # end
-                                    t.row option.usage, '-', option.description
+                                unless option.usage == '--verbosity, <s>' || option.usage == '--error-output-format, <s>' || option.usage == '-v, --version'
+                                    t.row option.usage.ljust(10, ' '), " \xe2\x86\x92 ", option.description
                                     option_conflicts_help(option, t)
                                     option_dependencies_help(option, t)
                                     option_validations_help(option, t)
@@ -107,11 +100,11 @@ module Convoy
 
             def commands_help(commands, f)
                 if commands.count > 0
-                    f.puts "COMMANDS"
+                    f.puts "\x1B[38;5;84mCOMMANDS\x1B[0m"
                     f.indent(4) do |f|
                         f.grid(:columns => 3) do |t|
                             commands.each do |command|
-                                t.row command.name_with_aliases, '-', command.outline
+                                t.row command.name_with_aliases.ljust(10, ' '), " \xe2\x86\x92 ", command.outline
                             end
                         end
                         f.newline

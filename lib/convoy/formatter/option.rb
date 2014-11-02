@@ -11,11 +11,11 @@ module Convoy
             end
 
             def usage
-                [long_string, short_string, type_string].select { |item| !item.empty? }.join(' ')
+                [short_string, long_string, type_string].select { |item| !item.empty? }.join(', ')
             end
 
             def description
-                [base_description_string, description_default_string].select { |item| !item.empty? }.join(' ')
+                [base_description_string, description_default_string].select { |item| !item.empty? }.join(" ")
             end
 
             def has_conflicts?

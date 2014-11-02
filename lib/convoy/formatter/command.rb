@@ -10,7 +10,7 @@ module Convoy
             end
 
             def name_with_aliases
-                [name, aliases].flatten.join(", ")
+                [aliases, name].flatten.join(', ')
             end
 
             def outline
