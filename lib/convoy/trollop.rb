@@ -357,15 +357,23 @@ module Trollop
                           when /^--([^-]\S*)$/;
                               @long[$1] || @long["no-#{$1}"]
                           else
-                              ; raise CommandlineError, "invalid argument syntax: '#{arg}'"
+                              #  raise CommandlineError, "invalid argument syntax: '#{arg}'"
+                              puts "\n  \x1B[48;5;196m ERROR \x1B[0m \xe2\x80\x94 Invalid argument syntax: \x1B[38;5;123m#{arg}\x1B[0m\n\n"
+                              exit
                       end
 
                 sym = nil if arg =~ /--no-/ # explicitly invalidate --no-no- arguments
 
-                raise CommandlineError, "unknown argument '#{arg}'" unless sym
+                # raise CommandlineError, "unknown argument '#{arg}'" unless sym
+                unless sym
+                    puts "\n  \x1B[48;5;196m ERROR \x1B[0m \xe2\x80\x94 Unknown flag: \x1B[38;5;123m#{arg}\x1B[0m\n\n"
+                    exit
+                end
 
                 if given_args.include?(sym) && !@specs[sym][:multi]
-                    raise CommandlineError, "option '#{arg}' specified multiple times"
+                    # raise CommandlineError, "option '#{arg}' specified multiple times"
+                    puts "\n  \x1B[48;5;196m ERROR \x1B[0m \xe2\x80\x94 Flag specified multiple times: \x1B[38;5;123m#{arg}\x1B[0m\n\n"
+                    exit
                 end
 
                 given_args[sym] ||= {}
