@@ -12,8 +12,9 @@ module Convoy
                 options = Options.new(parser, setup, context)
                 commands = Commands.new(setup, context)
                 current_command = Commands.command_for(setup, context)
+                system('clear')
+                puts
                 StreamOutputFormatter.new($stdout, :max_output_width => Terminal.width) do |f|
-                    puts
                     if setup.summary_for != '' && !setup.summary_for.nil?
                         f.puts setup.summary_for, :newlines => 2
                     end
