@@ -12,7 +12,10 @@ module Convoy
                 options = Options.new(parser, setup, context)
                 commands = Commands.new(setup, context)
                 current_command = Commands.command_for(setup, context)
-                system('clear')
+                # Uncomment the following line if you want the screen
+                # to be cleared before the --help messages show.
+                #
+                # system('clear')
                 puts
                 StreamOutputFormatter.new($stdout, :max_output_width => Terminal.width) do |f|
                     if setup.summary_for != '' && !setup.summary_for.nil?
