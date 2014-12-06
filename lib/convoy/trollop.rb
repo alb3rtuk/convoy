@@ -429,7 +429,7 @@ module Trollop
             required.each do |sym, val|
                 # raise CommandlineError, "option --#{@specs[sym][:long]} must be specified" unless given_args.include? sym
                 unless given_args.include? sym
-                    puts "\n  \x1B[48;5;196m ERROR \x1B[0m \xe2\x80\x94 option --#{@specs[sym][:long]} must be specified\n\n"
+                    puts "\n  \x1B[48;5;196m ERROR \x1B[0m \xe2\x80\x94 Option --#{@specs[sym][:long]} must be specified\n\n"
                     exit
                 end
             end
@@ -441,7 +441,7 @@ module Trollop
                 opts = @specs[sym]
 
                 # raise CommandlineError, "option '#{arg}' needs a parameter" if params.empty? && opts[:type] != :flag
-                puts "\n  \x1B[48;5;196m ERROR \x1B[0m \xe2\x80\x94 Option needs a parameter: #{arg}\n\n" if params.empty? && opts[:type] != :flag
+                puts "\n  \x1B[48;5;196m ERROR \x1B[0m \xe2\x80\x94 Option '#{arg}' needs a parameter\n\n" if params.empty? && opts[:type] != :flag
                 exit
 
                 vals["#{sym}_given".intern] = true # mark argument as specified on the commandline
