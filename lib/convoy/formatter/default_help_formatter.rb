@@ -26,7 +26,7 @@ module Convoy
                             f_inner.puts setup.description_for, :newlines => 2
                         end
                     end
-                    # name_help(current_command, f)
+                    name_help(current_command, f)
                     usage_help(current_command, f)
                     version_help(current_command, f)
                     commands_help(commands, f)
@@ -37,13 +37,15 @@ module Convoy
             private
 
             def name_help(current_command, f)
-                f.puts "\x1B[38;5;84mNAME\x1B[0m"
-                f.indent(4) do |f|
-                    f.grid(:columns => 3) do |t|
-                        t.row current_command.script_name, '-', setup.summary_for(context)
+                # f.puts "\x1B[38;5;84mNAME\x1B[0m"
+                if setup.description_for(context) != ''
+                    f.indent(4) do |f|
+                        # f.grid(:columns => 3) do |t|
+                        #     t.row current_command.script_name, '-', setup.summary_for(context)
+                        # end
+                        # f.newline
+                        f.puts(setup.description_for(context), :newlines => 2)
                     end
-                    f.newline
-                    f.puts(setup.description_for(context), :newlines => 2) if setup.description_for(context)
                 end
             end
 
