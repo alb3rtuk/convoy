@@ -21,11 +21,11 @@ module Convoy
                     if setup.summary_for != '' && !setup.summary_for.nil?
                         f.puts setup.summary_for, :newlines => 2
                     end
-                    if (setup.description_for != '' && !setup.description_for.nil?) && current_command.summary == setup.summary_for
-                        f.indent(4) do |f_inner|
-                            f_inner.puts setup.description_for, :newlines => 2
-                        end
-                    end
+                    # if (setup.description_for != '' && !setup.description_for.nil?) && current_command.summary == setup.summary_for
+                    #     f.indent(4) do |f_inner|
+                    #         f_inner.puts setup.description_for, :newlines => 2
+                    #     end
+                    # end
                     name_help(current_command, f)
                     usage_help(current_command, f)
                     version_help(current_command, f)
