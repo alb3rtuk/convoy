@@ -358,7 +358,7 @@ module Trollop
                               @long[$1] || @long["no-#{$1}"]
                           else
                               #  raise CommandlineError, "invalid argument syntax: '#{arg}'"
-                              puts "\n  \x1B[48;5;196m ERROR \x1B[0m \xe2\x80\x94 Invalid argument syntax: #{arg}\n\n"
+                              puts "\n    \x1B[48;5;196m Error \x1B[0m \xe2\x86\x92 Invalid argument syntax: #{arg}\n\n"
                               exit
                       end
 
@@ -366,13 +366,13 @@ module Trollop
 
                 # raise CommandlineError, "unknown argument '#{arg}'" unless sym
                 unless sym
-                    puts "\n  \x1B[48;5;196m ERROR \x1B[0m \xe2\x80\x94 Unknown flag: #{arg}\n\n"
+                    puts "\n    \x1B[48;5;196m Error \x1B[0m \xe2\x86\x92 Unknown flag: #{arg}\n\n"
                     exit
                 end
 
                 if given_args.include?(sym) && !@specs[sym][:multi]
                     # raise CommandlineError, "option '#{arg}' specified multiple times"
-                    puts "\n  \x1B[48;5;196m ERROR \x1B[0m \xe2\x80\x94 Flag specified multiple times: #{arg}\n\n"
+                    puts "\n    \x1B[48;5;196m Error \x1B[0m \xe2\x86\x92 Flag specified multiple times: #{arg}\n\n"
                     exit
                 end
 

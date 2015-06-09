@@ -121,7 +121,7 @@ module Convoy
 
         def print_convoy_error_message(e)
             print_stacktrace(e)
-            error_logger.warn {"\n  \x1B[48;5;196m ERROR \x1B[0m An internal Convoy error occurred.\n\n    You should probably report it to \x1B[38;5;222mAlbert Rannetsperger\x1B[0m or create an issue on his \x1B[38;5;222mGitHub\x1B[0m page (https://github.com/alb3rtuk).\n    Make sure to include the stacktrace above (although the way Ruby works, it probably won't be very helpful).\n"}
+            error_logger.warn {"\n    \x1B[48;5;196m Error \x1B[0m \xe2\x86\x92 An internal Convoy error occurred.\n\n    You should probably report it to \x1B[38;5;222mAlbert Rannetsperger\x1B[0m or create an issue on his \x1B[38;5;222mGitHub\x1B[0m page (https://github.com/alb3rtuk).\n    Make sure to include the stacktrace above (although the way Ruby works, it probably won't be very helpful).\n"}
         end
     end
 end
