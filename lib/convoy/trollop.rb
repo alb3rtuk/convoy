@@ -60,7 +60,7 @@ module Trollop
         ## The complete set of legal values for the +:type+ parameter of #opt.
         TYPES = FLAG_TYPES + SINGLE_ARG_TYPES + MULTI_ARG_TYPES
 
-        INVALID_SHORT_ARG_REGEX = /[\d-]/ #:nodoc:
+        INVALID_SHORT_ARG_REGEX = /[-]/ #:nodoc:
 
         ## The values from the commandline that were not interpreted by #parse.
         attr_reader :leftovers
