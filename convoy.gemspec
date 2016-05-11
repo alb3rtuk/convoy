@@ -2,9 +2,11 @@ $LOAD_PATH << File.expand_path(File.join('..', 'lib'), __FILE__)
 
 require 'date'
 
+require_relative 'version'
+
 Gem::Specification.new do |s|
     s.name = 'convoy'
-    s.version = '1.1.0'
+    s.version = VERSION
     s.date = Date.today.to_s
     s.summary = %q{A library that makes building command line apps in ruby so easy, you'll feel like an expert is guiding you through it}
     s.description = %q{Writing even complex command-line apps should be quick, easy and fun. Convoy takes the excellent Trollop option parser and adds a whole bunch of awesome features to produce a library you will always want to turn to when a 'quick script' is in order.}
