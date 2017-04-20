@@ -408,14 +408,20 @@ module Trollop
 
                 case type
                     when :depends
-                        syms.each { |sym| raise CommandlineError, "--#{@specs[constraint_sym][:long]} requires --#{@specs[sym][:long]}" unless given_args.include? sym }
+                        syms.each { |sym|
+                            Nimzo::Terminal::error('Missing constraint', "--#{@specs[constraint_sym][:long]} requires --#{@specs[sym][:long]}") unless given_args.include? sym
+                        }
                     when :conflicts
-                        syms.each { |sym| raise CommandlineError, "--#{@specs[constraint_sym][:long]} conflicts with --#{@specs[sym][:long]}" if given_args.include?(sym) && (sym != constraint_sym) }
+                        syms.each { |sym|
+                            Nimzo::Terminal::error('Conflicting constraint', "--#{@specs[constraint_sym][:long]} conflicts with --#{@specs[sym][:long]}") if given_args.include?(sym) && (sym != constraint_sym)
+                        }
                 end
             end
 
             required.each do |sym, val|
-                raise CommandlineError, "option --#{@specs[sym][:long]} must be specified" unless given_args.include? sym
+                unless given_args.include? sym
+                    Nimzo::Terminal::error('Missing option', "option --#{@specs[sym][:long]} must be specified")
+                end
             end
 
             ## parse parameters
@@ -423,7 +429,10 @@ module Trollop
                 arg, params, negative_given = given_data.values_at :arg, :params, :negative_given
 
                 opts = @specs[sym]
-                raise CommandlineError, "option '#{arg}' needs a parameter" if params.empty? && opts[:type] != :flag
+
+                if params.empty? && opts[:type] != :flag
+                    Nimzo::Terminal::error('Missing parameter', "option '#{arg}' needs a parameter")
+                end
 
                 vals["#{sym}_given".intern] = true # mark argument as specified on the commandline
 
