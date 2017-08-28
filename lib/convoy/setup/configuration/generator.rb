@@ -21,10 +21,10 @@ module Convoy
                     commands.each do |command_name|
                         command_name = command_name.to_sym
                         #next if command_name == :convoy
-                        options[command_name] = {}
-                        options[command_name][:options] = {}
+                        options[command_name]            = {}
+                        options[command_name][:options]  = {}
                         options[command_name][:commands] = {}
-                        current_context = context.dup
+                        current_context                  = context.dup
                         current_context << command_name
                         options(current_context, options[command_name][:options]) #command_options
                         options_for_commands(setup.canonical_command_names_for(current_context), current_context, options[command_name][:commands])
@@ -34,17 +34,17 @@ module Convoy
                 def init_config_hash
                     {
                         :global => {
-                            :options => {},
+                            :options  => {},
                             :commands => {}
                         },
-                        :user => {}
+                        :user   => {}
                     }
                 end
 
                 def options(context = [], options = {})
                     command_names = setup.command_names_for(context)
-                    parser = init_parser(command_names)
-                    parser = add_setup_options_to(parser, context)
+                    parser        = init_parser(command_names)
+                    parser        = add_setup_options_to(parser, context)
                     options.merge!(default_option_values(parser))
                 end
 

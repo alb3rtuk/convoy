@@ -12,16 +12,16 @@ module Convoy
 
         def initialize(option_string, &block)
             @option_string = option_string
-            @setup = nil
-            @block = block
+            @setup         = nil
+            @block         = block
         end
 
         def setup_application
             old_error_sev_threshold = error_logger.sev_threshold
             begin
                 error_logger.sev_threshold = ::Logger::DEBUG
-                cli_app_configuration = Convoy::Setup::Dsl::Global.new(&@block)
-                @setup = Convoy::SetupAccessor.new(cli_app_configuration)
+                cli_app_configuration      = Convoy::Setup::Dsl::Global.new(&@block)
+                @setup                     = Convoy::SetupAccessor.new(cli_app_configuration)
                 self
             rescue => e
                 handle_convoy_error(e)
@@ -44,9 +44,9 @@ module Convoy
                 configuration = Convoy::Setup::Configuration::Loader.new(setup, auto_options).configuration
 
                 invoked_options, arguments = Convoy::OptionParser.new(configuration, setup).parse(cli_options)
-                context = context_from_options(invoked_options[:global])
-                action = setup.action_for(context)
-                current_command = context.empty? ? :global : context.last
+                context                    = context_from_options(invoked_options[:global])
+                action                     = setup.action_for(context)
+                current_command            = context.empty? ? :global : context.last
                 raise Convoy::ClientError.new("No action defined for command '#{current_command}'") unless action
                 actual_arguments = Convoy::Arguments.read(arguments, setup.arguments_required_for(context))
             rescue => e
@@ -89,15 +89,15 @@ module Convoy
         def handle_convoy_error(e)
             if e.kind_of?(Convoy::UserError)
                 print_stacktrace(e)
-                error_logger.debug {'Convoy app failed to execute successfully, due to user error'}
+                error_logger.debug { 'Convoy app failed to execute successfully, due to user error' }
                 exit(Convoy::USER_ERROR_EXIT_CODE)
             elsif e.kind_of?(Convoy::ClientError)
                 print_stacktrace(e)
-                error_logger.debug {'Convoy app failed to execute successfully, due to client setup error'}
+                error_logger.debug { 'Convoy app failed to execute successfully, due to client setup error' }
                 exit(Convoy::CLIENT_ERROR_EXIT_CODE)
             else
                 print_convoy_error_message(e)
-                error_logger.debug {'Convoy app failed to execute successfully, due to internal error'}
+                error_logger.debug { 'Convoy app failed to execute successfully, due to internal error' }
                 exit(Convoy::INTERNAL_ERROR_EXIT_CODE)
             end
         end
@@ -105,11 +105,11 @@ module Convoy
         def handle_action_error(e)
             if e.kind_of?(Convoy::Error)
                 print_convoy_error_message(e)
-                error_logger.debug {'Convoy app failed to execute successfully, due to internal error'}
+                error_logger.debug { 'Convoy app failed to execute successfully, due to internal error' }
                 exit(Convoy::INTERNAL_ERROR_EXIT_CODE)
             else
                 print_stacktrace(e)
-                error_logger.debug {'Convoy app failed to execute successfully, due to unknown error'}
+                error_logger.debug { 'Convoy app failed to execute successfully, due to unknown error' }
                 exit(Convoy::EXTERNAL_ERROR_EXIT_CODE)
             end
         end
@@ -121,7 +121,7 @@ module Convoy
 
         def print_convoy_error_message(e)
             print_stacktrace(e)
-            error_logger.warn {"\n    \x1B[48;5;196m Error \x1B[0m \xe2\x86\x92 An internal Convoy error occurred.\n\n    You should probably report it to \x1B[38;5;222mAlbert Rannetsperger\x1B[0m or create an issue on his \x1B[38;5;222mGitHub\x1B[0m page (https://github.com/alb3rtuk).\n    Make sure to include the stacktrace above (although the way Ruby works, it probably won't be very helpful).\n"}
+            error_logger.warn { "\n    \x1B[48;5;196m Error \x1B[0m \xe2\x86\x92 An internal Convoy error occurred.\n\n    You should probably report it to \x1B[38;5;222mAlbert Rannetsperger\x1B[0m or create an issue on his \x1B[38;5;222mGitHub\x1B[0m page (https://github.com/alb3rtuk).\n    Make sure to include the stacktrace above (although the way Ruby works, it probably won't be very helpful).\n" }
         end
     end
 end

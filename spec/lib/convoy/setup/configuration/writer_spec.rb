@@ -2,7 +2,7 @@ describe Convoy::Setup::Configuration::Writer do
     include FakeFS::SpecHelpers
     let(:writer) { Convoy::Setup::Configuration::Writer.new(path, data) }
     let(:path) { '/usr/alan/blah.json' }
-    let(:data) { {:hello => :world} }
+    let(:data) { { :hello => :world } }
 
     describe "#write" do
         subject { writer.write }
@@ -19,10 +19,10 @@ describe Convoy::Setup::Configuration::Writer do
                 it { subject.data.should == data }
                 it("file should have the right contents") do
                     subject
-                    json = File.read(path)
-                    hash = ::JSON.parse(json)
+                    json        = File.read(path)
+                    hash        = ::JSON.parse(json)
                     actual_data = Convoy::Utils.symbolize_keys(hash)
-                    actual_data.should == {:hello => "world"}
+                    actual_data.should == { :hello => "world" }
                 end
             end
 
@@ -45,16 +45,16 @@ describe Convoy::Setup::Configuration::Writer do
             it { subject.data.should == data }
             it("file should have the right contents") do
                 subject
-                json = File.read(path)
-                hash = ::JSON.parse(json)
+                json        = File.read(path)
+                hash        = ::JSON.parse(json)
                 actual_data = Convoy::Utils.symbolize_keys(hash)
-                actual_data.should == {:hello => "world"}
+                actual_data.should == { :hello => "world" }
             end
         end
 
         context "when file does exit" do
-            let(:previous_data) { {:hello => :blah} }
-            let(:data) { {:hello => :world, :foo => :bar} }
+            let(:previous_data) { { :hello => :blah } }
+            let(:data) { { :hello => :world, :foo => :bar } }
             before do
                 FileUtils.mkdir_p(File.dirname path)
                 File.open(path, 'w') { |f| f.write(JSON.pretty_generate(previous_data)) }
@@ -65,10 +65,10 @@ describe Convoy::Setup::Configuration::Writer do
             it { subject.data.should == data }
             it("file should have the right contents") do
                 subject
-                json = File.read(path)
-                hash = ::JSON.parse(json)
+                json        = File.read(path)
+                hash        = ::JSON.parse(json)
                 actual_data = Convoy::Utils.symbolize_keys(hash)
-                actual_data.should == {:hello => "blah", :foo => "bar"}
+                actual_data.should == { :hello => "blah", :foo => "bar" }
             end
         end
     end

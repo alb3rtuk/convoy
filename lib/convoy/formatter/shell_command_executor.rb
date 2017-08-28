@@ -11,7 +11,7 @@ module Convoy
 
             def execute_in_current_shell(success_callback = nil, error_callback = nil)
                 begin
-                    result = `#{command}`
+                    result         = `#{command}`
                     process_status = $?
                     raise Convoy::InternalError.new("Shell command exited with a non-zero (#{process_status.exitstatus}) exit code") if process_status.exitstatus != 0
                     success_callback.call(command, result) if success_callback

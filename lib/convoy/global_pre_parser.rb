@@ -14,8 +14,8 @@ module Convoy
 
         def parse_global_options(cli_options, context = [])
             stop_words = setup.command_names_for(context).map(&:to_s)
-            parser = init_parser(stop_words)
-            parser = add_setup_options_to(parser, context)
+            parser     = init_parser(stop_words)
+            parser     = add_setup_options_to(parser, context)
             parser.version(setup.version) #set the version if it was provided
             parser.help_formatter(Convoy::Formatter::DefaultHelpFormatter.new(setup, context))
             parsed_options = parse_options_string(parser, cli_options)

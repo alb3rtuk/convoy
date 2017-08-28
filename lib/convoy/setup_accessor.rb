@@ -98,7 +98,7 @@ module Convoy
 
         def command_aliases_for(command_name, context = [])
             with_context(context) do |current_context|
-                commands = fetch_instance_variable_from(current_context, :commands)
+                commands    = fetch_instance_variable_from(current_context, :commands)
                 description = fetch_instance_variable_from(commands[command_name], :aliases)
             end
         end
@@ -121,11 +121,11 @@ module Convoy
         end
 
         def with_context(context = [], &block)
-            context = [] if context.nil? || context.empty?
-            context = [context] unless context.kind_of?(Array)
+            context         = [] if context.nil? || context.empty?
+            context         = [context] unless context.kind_of?(Array)
             current_context = global_instance
             context.each do |command_name|
-                commands = fetch_instance_variable_from(current_context, :commands)
+                commands        = fetch_instance_variable_from(current_context, :commands)
                 current_context = commands[command_name.to_sym]
             end
             block.call(current_context)
@@ -137,7 +137,7 @@ module Convoy
 
         def action_block_from(context_object)
             action_object = fetch_instance_variable_from(context_object, :action)
-            block = fetch_instance_variable_from(action_object, :block)
+            block         = fetch_instance_variable_from(action_object, :block)
             #TODO make sure that if there is no block we exit with a client error
         end
 

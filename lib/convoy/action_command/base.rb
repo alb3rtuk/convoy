@@ -4,22 +4,22 @@ module Convoy
             attr_reader :options, :arguments, :config
 
             def initialize(options, arguments, config={})
-                @options = options
-                @arguments = arguments
-                @config = config
-                @command_context = nil
-                @command_options = nil
-                @parent_options = nil
+                @options             = options
+                @arguments           = arguments
+                @config              = config
+                @command_context     = nil
+                @command_options     = nil
+                @parent_options      = nil
                 @grandparent_options = nil
-                @global_options = nil
+                @global_options      = nil
             end
 
             protected
 
             def command_context
                 return @command_context if @command_context
-                @command_context = []
-                options[:global] ||= {}
+                @command_context     = []
+                options[:global]     ||= {}
                 current_command_hash = options[:global][:commands] || {}
                 until current_command_hash.keys.empty?
                     key = current_command_hash.keys.first

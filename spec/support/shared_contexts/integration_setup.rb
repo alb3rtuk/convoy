@@ -11,17 +11,17 @@ shared_context "integration test setup", :integration => true do
     after do
         $stderr = STDERR
         $stdout = STDOUT
-        $stdin = STDIN
+        $stdin  = STDIN
     end
 
     module Convoy
         class IntegrationTestCommand < ::Convoy::ActionCommand::Base
             def execute(result)
-                result[:command_name] = command_name
+                result[:command_name]    = command_name
                 result[:command_options] = command_options
-                result[:options] = options
-                result[:arguments] = arguments
-                result[:config] = config if config
+                result[:options]         = options
+                result[:arguments]       = arguments
+                result[:config]          = config if config
             end
         end
     end

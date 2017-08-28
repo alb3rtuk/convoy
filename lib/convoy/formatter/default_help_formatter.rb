@@ -4,13 +4,13 @@ module Convoy
             attr_reader :setup, :context
 
             def initialize(setup, context)
-                @setup = setup
+                @setup   = setup
                 @context = context
             end
 
             def print(parser)
-                options = Options.new(parser, setup, context)
-                commands = Commands.new(setup, context)
+                options         = Options.new(parser, setup, context)
+                commands        = Commands.new(setup, context)
                 current_command = Commands.command_for(setup, context)
                 # Uncomment the following line if you want the screen
                 # to be cleared before the --help messages show.

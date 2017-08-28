@@ -14,9 +14,9 @@ Convoy::App.create do |app|
 
         opts.dependency :option1, :on => :flag1
         opts.dependency :option2, :on => [:flag1, :option1]
-        opts.dependency :option3, :on => {:option1 => 'foo'}
+        opts.dependency :option3, :on => { :option1 => 'foo' }
         #opts.dependency :option4, :on => [{:flag1 => false}, :option1] #This will get you into big trouble as it can never be fulfilled
-        opts.dependency :option4, :on => [{:flag2 => false}, :option1]
+        opts.dependency :option4, :on => [{ :flag2 => false }, :option1]
     end
 
     app.action do |options, arguments|

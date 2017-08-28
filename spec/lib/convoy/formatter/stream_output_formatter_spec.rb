@@ -35,7 +35,7 @@ describe Convoy::Formatter::StreamOutputFormatter do
     describe "#puts" do
         subject { formatter.puts(string, options) }
         let(:string) { 'hello' }
-        let(:options) { {:newlines => newlines} }
+        let(:options) { { :newlines => newlines } }
         let(:newlines) { 1 }
 
         before { subject; stream.rewind }

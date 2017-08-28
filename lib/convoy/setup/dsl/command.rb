@@ -4,8 +4,8 @@ module Convoy
             class Command
                 def initialize(name, options = {}, &block)
                     reset(name)
-                    @description = options[:description] || options[:desc] || ""
-                    @aliases = [options[:aliases] || []].flatten
+                    @description        = options[:description] || options[:desc] || ""
+                    @aliases            = [options[:aliases] || []].flatten
                     @requires_arguments ||= options[:requires_arguments]
                     block.call(self) if block_given?
                 rescue => e
@@ -22,8 +22,8 @@ module Convoy
 
                 def command(name, options = {}, &block)
                     options[:requires_arguments] = @requires_arguments
-                    command = Command.new(name.to_sym, options, &block)
-                    aliases = [options[:aliases] || []].flatten + [name]
+                    command                      = Command.new(name.to_sym, options, &block)
+                    aliases                      = [options[:aliases] || []].flatten + [name]
                     aliases.each do |name|
                         @commands[name.to_sym] = command
                     end
@@ -48,13 +48,13 @@ module Convoy
                 private
 
                 def reset(name)
-                    @name = name
-                    @summary = nil
-                    @description = nil
+                    @name               = name
+                    @summary            = nil
+                    @description        = nil
                     @requires_arguments = false
-                    @commands = {}
-                    @options = Options.new(name)
-                    @action = Action.new(name)
+                    @commands           = {}
+                    @options            = Options.new(name)
+                    @action             = Action.new(name)
                     custom_reset
                 end
 

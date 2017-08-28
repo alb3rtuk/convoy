@@ -6,8 +6,8 @@ module Convoy
             attr_reader :parser, :setup, :context
 
             def initialize(parser, setup, context)
-                @parser = parser
-                @setup = setup
+                @parser  = parser
+                @setup   = setup
                 @context = context
             end
 

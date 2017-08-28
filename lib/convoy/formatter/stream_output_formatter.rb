@@ -1,25 +1,25 @@
 module Convoy
     module Formatter
         class StreamOutputFormatter
-            DEFAULT_OUTPUT_WIDTH = 80
+            DEFAULT_OUTPUT_WIDTH  = 80
             DEFAULT_INDENT_STRING = ' '
-            DEFAULT_INDENT = 0
+            DEFAULT_INDENT        = 0
 
             attr_reader :stream, :indent_string, :current_indent, :max_output_width, :cursor_position
 
             def initialize(stream = $stdout, options = {}, &block)
-                @stream = stream
+                @stream           = stream
                 @max_output_width = options[:max_output_width] || DEFAULT_OUTPUT_WIDTH
-                @indent_string = options[:indent_string] || DEFAULT_INDENT_STRING
-                @current_indent = options[:current_indent] || DEFAULT_INDENT
-                @cursor_position = CursorPosition.new(@max_output_width)
+                @indent_string    = options[:indent_string] || DEFAULT_INDENT_STRING
+                @current_indent   = options[:current_indent] || DEFAULT_INDENT
+                @cursor_position  = CursorPosition.new(@max_output_width)
                 block.call(self) if block_given?
             end
 
             def print(string)
                 splitter_input = pad_string_to_account_for_cursor_position(string.to_s)
-                segments = StringSplitter.new(max_output_width).split(splitter_input)
-                segments = remove_padding_that_account_for_cursor_position(segments)
+                segments       = StringSplitter.new(max_output_width).split(splitter_input)
+                segments       = remove_padding_that_account_for_cursor_position(segments)
                 segments.each do |segment|
                     output_string = "#{current_indent_string}#{segment}"
                     output_string = segment unless cursor_position.newline?
@@ -29,7 +29,7 @@ module Convoy
                 end
             end
 
-            def puts(string, options = {:newlines => 1})
+            def puts(string, options = { :newlines => 1 })
                 print(string)
                 newline(options[:newlines])
             end
@@ -48,7 +48,7 @@ module Convoy
             def grid(options = {}, &block)
                 if block_given?
                     options[:width] ||= max_output_width
-                    grid = StringGrid.new(options, &block)
+                    grid            = StringGrid.new(options, &block)
                     puts grid.to_s
                 end
             end

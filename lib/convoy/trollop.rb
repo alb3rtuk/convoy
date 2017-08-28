@@ -73,16 +73,16 @@ module Trollop
 
         ## Initializes the parser, and instance-evaluates any block given.
         def initialize *a, &b
-            @version = nil
-            @leftovers = []
-            @specs = {}
-            @long = {}
-            @short = {}
-            @order = []
-            @constraints = []
-            @stop_words = []
+            @version         = nil
+            @leftovers       = []
+            @specs           = {}
+            @long            = {}
+            @short           = {}
+            @order           = []
+            @constraints     = []
+            @stop_words      = []
             @stop_on_unknown = false
-            @help_formatter = nil
+            @help_formatter  = nil
 
             #instance_eval(&b) if b # can't take arguments
             cloaker(&b).bind(self).call(*a) if b
@@ -257,10 +257,10 @@ module Trollop
             ## fill in :multi
             opts[:multi] ||= false
 
-            opts[:desc] ||= desc
-            @long[opts[:long]] = name
+            opts[:desc]          ||= desc
+            @long[opts[:long]]   = name
             @short[opts[:short]] = name if opts[:short] && opts[:short] != :none
-            @specs[name] = opts
+            @specs[name]         = opts
             @order << [:opt, name]
         end
 
@@ -327,7 +327,7 @@ module Trollop
         ##
         ## throws CommandlineError, HelpNeeded, and VersionNeeded exceptions.
         def parse cmdline=ARGV
-            vals = {}
+            vals     = {}
             required = {}
 
             opt :version, 'Prints version and exits' if @version unless @specs[:version] || @long['version']
@@ -335,8 +335,8 @@ module Trollop
 
             @specs.each do |sym, opts|
                 required[sym] = true if opts[:required]
-                vals[sym] = opts[:default]
-                vals[sym] = [] if opts[:multi] && !opts[:default] # multi arguments default to [], not nil
+                vals[sym]     = opts[:default]
+                vals[sym]     = [] if opts[:multi] && !opts[:default] # multi arguments default to [], not nil
             end
 
             resolve_default_short_options!
@@ -376,10 +376,10 @@ module Trollop
                     exit
                 end
 
-                given_args[sym] ||= {}
-                given_args[sym][:arg] = arg
+                given_args[sym]                  ||= {}
+                given_args[sym][:arg]            = arg
                 given_args[sym][:negative_given] = negative_given
-                given_args[sym][:params] ||= []
+                given_args[sym][:params]         ||= []
 
                 # The block returns the number of parameters taken.
                 num_params_taken = 0
@@ -525,7 +525,7 @@ module Trollop
                     end
             end
 
-            leftcol_width = left.values.map { |s| s.length }.max || 0
+            leftcol_width  = left.values.map { |s| s.length }.max || 0
             rightcol_start = leftcol_width + 6 # spaces
 
             unless @order.size > 0 && @order.first.first == :text
@@ -609,7 +609,7 @@ module Trollop
         ## yield successive arg, parameter pairs
         def each_arg args
             remains = []
-            i = 0
+            i       = 0
 
             until i >= args.length
                 if @stop_words.member? args[i]
@@ -704,7 +704,7 @@ module Trollop
 
         def collect_argument_parameters args, start_at
             params = []
-            pos = start_at
+            pos    = start_at
             while args[pos] && args[pos] !~ PARAM_RE && !@stop_words.member?(args[pos]) do
                 params << args[pos]
                 pos += 1
@@ -721,16 +721,16 @@ module Trollop
                 c = opts[:long].split(//).find { |d| d !~ INVALID_SHORT_ARG_REGEX && !@short.member?(d) }
                 if c # found a character to use
                     opts[:short] = c
-                    @short[c] = name
+                    @short[c]    = name
                 end
             end
         end
 
         def wrap_line str, opts={}
             prefix = opts[:prefix] || 0
-            width = opts[:width] || (self.width - 1)
-            start = 0
-            ret = []
+            width  = opts[:width] || (self.width - 1)
+            start  = 0
+            ret    = []
             until start > str.length
                 nextt =
                     if start + width >= str.length

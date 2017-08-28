@@ -20,7 +20,7 @@ module Convoy
                 private
 
                 def custom_reset
-                    @version = nil
+                    @version     = nil
                     @config_file = nil
                 end
             end

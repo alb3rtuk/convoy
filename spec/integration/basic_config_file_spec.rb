@@ -35,7 +35,7 @@ describe "Convoy basic app with config file defined", :integration => true do
         context "and config file already exists" do
             before do
                 FileUtils.mkdir_p(File.dirname path)
-                File.open(path, 'w') { |f| f.write(JSON.pretty_generate({:global => {:commands => {}, :options => {:option1 => 'hello'}}, :user => {}})) }
+                File.open(path, 'w') { |f| f.write(JSON.pretty_generate({ :global => { :commands => {}, :options => { :option1 => 'hello' } }, :user => {} })) }
 
                 begin
                     subject
@@ -55,7 +55,7 @@ describe "Convoy basic app with config file defined", :integration => true do
             let(:option_string) { "" }
             before do
                 FileUtils.mkdir_p(File.dirname path)
-                File.open(path, 'w') { |f| f.write(JSON.pretty_generate({:global => {:commands => {}, :options => {:option1 => 'hello'}}, :user => {}})) }
+                File.open(path, 'w') { |f| f.write(JSON.pretty_generate({ :global => { :commands => {}, :options => { :option1 => 'hello' } }, :user => {} })) }
 
                 begin
                     subject
@@ -85,7 +85,7 @@ describe "Convoy basic app with config file defined", :integration => true do
 
         before do
             FileUtils.mkdir_p(File.dirname path)
-            File.open(path, 'w') { |f| f.write(JSON.pretty_generate({:global => {:commands => {}, :options => {:option1 => 'hello'}}, :user => {}})) }
+            File.open(path, 'w') { |f| f.write(JSON.pretty_generate({ :global => { :commands => {}, :options => { :option1 => 'hello' } }, :user => {} })) }
 
             begin
                 subject

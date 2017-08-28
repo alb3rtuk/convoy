@@ -16,7 +16,7 @@ module Convoy
             attr_reader :setup, :context
 
             def initialize(setup, context)
-                @setup = setup
+                @setup   = setup
                 @context = context
             end
 

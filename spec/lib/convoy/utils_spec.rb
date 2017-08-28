@@ -3,13 +3,13 @@ describe Convoy::Utils do
         subject { Convoy::Utils.symbolize_keys(hash) }
 
         context "when single level hash" do
-            let(:hash) { {'a' => 1, :b => 2} }
+            let(:hash) { { 'a' => 1, :b => 2 } }
             it("the :a key should be a symbol") { subject[:a].should == 1 }
             it("the :b key should be a symbol") { subject[:b].should == 2 }
         end
 
         context "when hash has nested hashes" do
-            let(:hash) { {'a' => 1, :b => {'c' => {'d' => 2}}} }
+            let(:hash) { { 'a' => 1, :b => { 'c' => { 'd' => 2 } } } }
             it("the :a key should be a symbol") { subject[:a].should == 1 }
             it("the nested keys, :b, :c and :d should all be symbols") { subject[:b][:c][:d].should == 2 }
         end

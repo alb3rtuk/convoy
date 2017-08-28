@@ -4,7 +4,7 @@ module Convoy
 
         def initialize(configuration, setup)
             @configuration = configuration
-            @setup = setup
+            @setup         = setup
         end
 
         def parse(cli_options)
@@ -20,7 +20,7 @@ module Convoy
         def init_invoked_options_hash
             {
                 :global => {
-                    :options => {},
+                    :options  => {},
                     :commands => {}
                 }
             }
@@ -37,9 +37,9 @@ module Convoy
             else
                 command = command_name_from(cli_options)
                 context << command
-                current_options = parse_options(cli_options, context)
-                options[command] = {}
-                options[command][:options] = current_options
+                current_options             = parse_options(cli_options, context)
+                options[command]            = {}
+                options[command][:options]  = current_options
                 options[command][:commands] = {}
                 parse_command_options(cli_options, context, options[command][:commands])
             end
@@ -47,10 +47,10 @@ module Convoy
 
         def parse_options(cli_options, context = [])
             stop_words = setup.command_names_for(context).map(&:to_s)
-            parser = init_parser(stop_words)
-            parser = add_setup_options_to(parser, context)
-            parser = add_option_conflicts_to(parser, context)
-            parser = default_option_values_from_config_for(parser, context)
+            parser     = init_parser(stop_words)
+            parser     = add_setup_options_to(parser, context)
+            parser     = add_option_conflicts_to(parser, context)
+            parser     = default_option_values_from_config_for(parser, context)
             parser.version(setup.version) #set the version if it was provided
             parser.help_formatter(Convoy::Formatter::DefaultHelpFormatter.new(setup, context))
             parsed_options = parse_options_string(parser, cli_options)
@@ -86,7 +86,7 @@ module Convoy
             unless configuration.empty?
                 parser.specs.each do |sym, opts|
                     if config_has_value_for_context?(sym, context)
-                        default = config_value_for_context(sym, context)
+                        default        = config_value_for_context(sym, context)
                         opts[:default] = default
                         if opts[:multi] && default.nil?
                             opts[:default] = [] # multi arguments default to [], not nil
@@ -114,7 +114,7 @@ module Convoy
         def config_hash_for_context(context)
             relevant_config_hash = configuration.global
             context.each do |command_name|
-                command_name = command_name.to_sym
+                command_name         = command_name.to_sym
                 relevant_config_hash = relevant_config_hash[:commands][command_name]
                 relevant_config_hash = ensure_config_hash_has_options_and_commands(relevant_config_hash)
             end
@@ -122,9 +122,9 @@ module Convoy
         end
 
         def ensure_config_hash_has_options_and_commands(relevant_config_hash)
-            relevant_config_hash ||= {}
+            relevant_config_hash            ||= {}
             relevant_config_hash[:commands] ||= {}
-            relevant_config_hash[:options] ||= {}
+            relevant_config_hash[:options]  ||= {}
             relevant_config_hash
         end
 

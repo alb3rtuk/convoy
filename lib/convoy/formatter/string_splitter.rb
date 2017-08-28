@@ -36,7 +36,7 @@ module Convoy
             def split_string(string)
                 result = []
                 if string.length > max_segment_width
-                    first_part = string.slice(0, max_segment_width)
+                    first_part  = string.slice(0, max_segment_width)
                     second_part = string.slice(max_segment_width..-1)
                     result << first_part
                     result << split_string(second_part)

@@ -5,7 +5,7 @@ module Convoy
                 class ExecutingScriptDirectory < Base
                     def locate
                         location_directory = File.dirname($0)
-                        filepath = File.expand_path(File.join(location_directory, filename))
+                        filepath           = File.expand_path(File.join(location_directory, filename))
                         File.exists?(filepath) ? filepath : nil
                     end
                 end

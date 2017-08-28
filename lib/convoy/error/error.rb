@@ -1,7 +1,7 @@
 module Convoy
     INTERNAL_ERROR_EXIT_CODE = 1
-    CLIENT_ERROR_EXIT_CODE = 2
-    USER_ERROR_EXIT_CODE = 3
+    CLIENT_ERROR_EXIT_CODE   = 2
+    USER_ERROR_EXIT_CODE     = 3
     EXTERNAL_ERROR_EXIT_CODE = 10
 
     #module to tag all exceptions coming out of Convoy with

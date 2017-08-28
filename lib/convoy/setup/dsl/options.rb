@@ -12,14 +12,14 @@ module Convoy
 
                 def initialize(command_name = :global)
                     @command_name = command_name
-                    @options = {}
+                    @options      = {}
                     @dependencies = {}
-                    @conflicts = {}
-                    @validations = {}
+                    @conflicts    = {}
+                    @validations  = {}
                 end
 
                 def opt(name, desc="", opts={})
-                    opts[:desc] ||= desc
+                    opts[:desc]    ||= desc
                     @options[name] ||= opts
                     dependency(name, :on => opts[:depends_on]) if opts[:depends_on]
                     conflict(*[name, opts[:conflicts_with]].flatten) if opts[:conflicts_with]
@@ -27,7 +27,7 @@ module Convoy
 
                 def validate(name, description, &block)
                     @validations[name] ||= []
-                    @validations[name] << {:desc => description, :block => block}
+                    @validations[name] << { :desc => description, :block => block }
                 end
 
                 def dependency(option_name, opts = {})
@@ -42,8 +42,8 @@ module Convoy
                 def conflict(*opts)
                     opts.each do |opt|
                         conflicts_for_opt = opts.reject { |value| value == opt }
-                        @conflicts[opt] ||= []
-                        @conflicts[opt] += conflicts_for_opt
+                        @conflicts[opt]   ||= []
+                        @conflicts[opt]   += conflicts_for_opt
                         @conflicts[opt].uniq!
                     end
                 end

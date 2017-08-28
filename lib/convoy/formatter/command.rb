@@ -4,9 +4,9 @@ module Convoy
             attr_reader :setup, :context, :name
 
             def initialize(command_name, setup, context)
-                @setup = setup
+                @setup   = setup
                 @context = context
-                @name = command_name.to_sym
+                @name    = command_name.to_sym
             end
 
             def name_with_aliases

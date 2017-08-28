@@ -5,7 +5,7 @@ module Convoy
                 attr_reader :setup, :auto_options
 
                 def initialize(setup, auto_options)
-                    @setup = setup
+                    @setup        = setup
                     @auto_options = auto_options
                 end
 

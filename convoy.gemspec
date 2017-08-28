@@ -5,18 +5,18 @@ require 'date'
 require_relative 'version'
 
 Gem::Specification.new do |s|
-    s.name = 'convoy'
-    s.version = VERSION
-    s.date = Date.today.to_s
-    s.summary = %q{A library that makes building command line apps in ruby so easy, you'll feel like an expert is guiding you through it}
-    s.description = %q{Writing even complex command-line apps should be quick, easy and fun. Convoy takes the excellent Trollop option parser and adds a whole bunch of awesome features to produce a library you will always want to turn to when a 'quick script' is in order.}
-    s.authors = ['Albert Rannetsperger']
-    s.email = 'alb3rtuk@hotmail.com'
-    s.homepage = 'http://github.com/alb3rtuk/convoy'
-    s.license = 'MIT'
+    s.name          = 'convoy'
+    s.version       = VERSION
+    s.date          = Date.today.to_s
+    s.summary       = %q{A library that makes building command line apps in ruby so easy, you'll feel like an expert is guiding you through it}
+    s.description   = %q{Writing even complex command-line apps should be quick, easy and fun. Convoy takes the excellent Trollop option parser and adds a whole bunch of awesome features to produce a library you will always want to turn to when a 'quick script' is in order.}
+    s.authors       = ['Albert Rannetsperger']
+    s.email         = 'alb3rtuk@hotmail.com'
+    s.homepage      = 'http://github.com/alb3rtuk/convoy'
+    s.license       = 'MIT'
     s.require_paths = ['lib']
-    s.files = `git ls-files`.split($/)
-    s.test_files = s.files.grep(%r{^(test|spec|features)/})
+    s.files         = `git ls-files`.split($/)
+    s.test_files    = s.files.grep(%r{^(test|spec|features)/})
     s.add_runtime_dependency 'nesty', '~> 1.0', '>= 1.0.2'
     s.add_runtime_dependency 'nimzo-lib', '1.2.0', '>= 1.2.0'
     s.add_development_dependency 'rspec', '~> 3.1', '>= 3.1.0'

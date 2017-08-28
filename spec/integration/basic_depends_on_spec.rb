@@ -137,7 +137,7 @@ describe "Convoy basic app with dependent options", :integration => true do
                     opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string
                     opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string, :multi => true
 
-                    opts.dependency :option2, :on => {:option1 => 'bar'}
+                    opts.dependency :option2, :on => { :option1 => 'bar' }
                 end
 
                 app.action do |options, arguments|
@@ -170,7 +170,7 @@ describe "Convoy basic app with dependent options", :integration => true do
                     opts.opt :option1, "Option1", :short => '-o', :long => '--option1', :type => :string
                     opts.opt :option2, "Option2", :short => :none, :long => '--option2', :type => :string, :multi => true
 
-                    opts.dependency :option2, :on => [:flag1, {:option1 => 'bar'}]
+                    opts.dependency :option2, :on => [:flag1, { :option1 => 'bar' }]
                 end
 
                 app.action do |options, arguments|

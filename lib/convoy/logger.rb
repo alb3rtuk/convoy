@@ -11,14 +11,14 @@ module Convoy
             def error
                 @error_logger ||= ::Logger.new($stderr).tap do |l|
                     #l.formatter = advanced_error_formatter
-                    l.formatter = basic_error_formatter
+                    l.formatter     = basic_error_formatter
                     l.sev_threshold = ::Logger::WARN
                 end
             end
 
             def output
                 @output_logger ||= ::Logger.new($stdout).tap do |l|
-                    l.formatter = output_formatter
+                    l.formatter     = output_formatter
                     l.sev_threshold = ::Logger::DEBUG
                     l.instance_eval do
                         def puts(message = nil, &block)
@@ -33,7 +33,7 @@ module Convoy
             end
 
             def setup_error_logger(auto_options)
-                error.formatter = send(:"#{auto_options.error_formatter}_error_formatter")
+                error.formatter     = send(:"#{auto_options.error_formatter}_error_formatter")
                 error.sev_threshold = ::Logger.const_get(auto_options.verbosity)
             end
 

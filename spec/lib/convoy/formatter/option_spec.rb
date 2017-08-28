@@ -4,7 +4,7 @@ describe Convoy::Formatter::Option do
     let(:context) { [] }
     let(:name) { 'option1' }
     let(:details) do
-        {:short => short, :long => "option1", :type => type, :default => default, :desc => desc, :multi => false}
+        { :short => short, :long => "option1", :type => type, :default => default, :desc => desc, :multi => false }
     end
     let(:short) { :none }
     let(:type) { :string }

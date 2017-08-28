@@ -7,9 +7,9 @@ module Convoy
             attr_accessor :rows
 
             def initialize(options = {}, &block)
-                @width = options[:width] || DEFAULT_WIDTH
+                @width        = options[:width] || DEFAULT_WIDTH
                 @column_count = options[:columns] || 3
-                @rows = []
+                @rows         = []
                 block.call(self) if block_given?
             end
 
@@ -80,7 +80,7 @@ module Convoy
             end
 
             def last_column_width
-                full_fair_column_width = max_column_width * column_count + max_column_width_remainder
+                full_fair_column_width         = max_column_width * column_count + max_column_width_remainder
                 all_but_last_fair_column_width = 0
                 (column_count - 1).times do |index|
                     all_but_last_fair_column_width += fair_column_width(index)
