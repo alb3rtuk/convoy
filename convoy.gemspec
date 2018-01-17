@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
     s.files         = `git ls-files`.split($/)
     s.test_files    = s.files.grep(%r{^(test|spec|features)/})
     s.add_runtime_dependency 'nesty', '~> 1.0', '>= 1.0.2'
-    s.add_runtime_dependency 'nimzo-lib', '1.2.0', '>= 1.2.0'
+    s.add_runtime_dependency 'nimzo-lib', '1.3.0', '>= 1.3.0'
     s.add_development_dependency 'rspec', '~> 3.1', '>= 3.1.0'
     s.add_development_dependency 'fakefs', '~> 0.5', '>= 0.5.3'
     s.add_development_dependency 'rake', '~> 10.3', '>= 10.3.2'
