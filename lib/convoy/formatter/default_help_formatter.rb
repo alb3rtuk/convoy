@@ -27,8 +27,8 @@ module Convoy
                     #     end
                     # end
                     name_help(current_command, f)
-                    usage_help(current_command, f)
                     version_help(current_command, f)
+                    usage_help(current_command, f)
                     commands_help(commands, f)
                     options_help(options, f)
                 end
@@ -37,37 +37,30 @@ module Convoy
             private
 
             def name_help(current_command, f)
-                # f.puts "\x1B[38;5;84mNAME\x1B[0m"
                 if setup.description_for(context) != ''
                     f.indent(4) do |f|
-                        # f.grid(:columns => 3) do |t|
-                        #     t.row current_command.script_name, '-', setup.summary_for(context)
-                        # end
-                        # f.newline
-                        f.puts(setup.description_for(context), :newlines => 2)
+                        f.puts("\x1B[38;5;250m#{setup.description_for(context)}\x1B[0m", :newlines => 2)
                     end
-                end
-            end
-
-            def usage_help(current_command, f)
-                f.puts "\x1B[38;5;84mUSAGE\x1B[0m"
-                f.indent(4) do |f|
-                    f.puts current_command.usage, :newlines => 2
                 end
             end
 
             def version_help(current_command, f)
                 if setup.version
-                    f.puts "\x1B[38;5;84mVERSION\x1B[0m"
                     f.indent(4) do |f|
-                        f.puts setup.version, :newlines => 2
+                        f.puts "\x1B[38;5;250mVersion: \x1B[38;5;46m#{setup.version}\x1B[0m", :newlines => 1
                     end
+                end
+            end
+
+            def usage_help(current_command, f)
+                f.indent(4) do |f|
+                    f.puts "\x1B[38;5;250m  Usage: \x1B[38;5;46m#{current_command.usage}\x1B[0m", :newlines => 2
                 end
             end
 
             def options_help(options, f)
                 if options.count > 0
-                    f.puts "\x1B[38;5;84mFLAGS\x1B[0m"
+                    f.puts "  \x1B[38;5;255mFLAGS\x1B[0m"
                     f.indent(4) do |f|
                         f.grid(:columns => 3) do |t|
                             options.each do |option|
@@ -106,7 +99,7 @@ module Convoy
 
             def commands_help(commands, f)
                 if commands.count > 0
-                    f.puts "\x1B[38;5;84mCOMMANDS\x1B[0m"
+                    f.puts "  \x1B[38;5;255mCOMMANDS\x1B[0m"
                     f.indent(4) do |f|
                         f.grid(:columns => 3) do |t|
                             commands.each do |command|
