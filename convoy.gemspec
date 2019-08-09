@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
     s.require_paths = ['lib']
     s.files         = `git ls-files`.split($/)
     s.test_files    = s.files.grep(%r{^(test|spec|features)/})
-    s.add_runtime_dependency 'blufin-lib', '>=1.5.8', '>=1.5.8'
+    s.add_runtime_dependency 'blufin-lib', '>=1.6.0', '>=1.6.0'
     s.add_runtime_dependency 'nesty', '~> 1.0', '>= 1.0.2'
     s.add_development_dependency 'rspec', '~> 3.1', '>= 3.1.0'
     s.add_development_dependency 'fakefs', '~> 0.5', '>= 0.5.3'
